@@ -9,7 +9,7 @@
 		<script src="JQ/jquery.min.js"></script>
 		<script src="JQ/jquery.mobile-1.4.5.min.js"></script>
                 <script src="js/markerwithlabel.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
         <script>
             function cargarMapa(){
                 $( document ).on( "pageinit", "#confirmar", function(e,data) {
@@ -58,7 +58,7 @@
                     function MuestraMapa(latlng) {
 
                         var myOptions = {
-                            zoom: 16,
+                            zoom: 13,
                             center: latlng,
                             disableDefaultUI: true,
                             mapTypeId: google.maps.MapTypeId.ROADMAP};
@@ -66,24 +66,53 @@
                         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
                         var infowindow = new google.maps.InfoWindow({position: latlng,content: '<p>Mi posición</p>'+latlng});
                         var infowindowCaf = new google.maps.InfoWindow({position: latlng,content: '<p>Nombre de Caf</p>'});
-
+                          
                         var marker = new google.maps.Marker({
                                 position: latlng,
                                 map: map,
                                 title: "Mi posición",
                                 animation: google.maps.Animation.DROP});
-                                
-                        var cafImgen = 'images/audifarma.png';
                         
-                        var caf = new google.maps.Marker({
-                          position: defaultPos,
-                          map: map,
-                          icon: cafImgen
-                        });                                  
+                        setMarkers(map);
+                        function setMarkers(map) {
+                            var distancia;
+                            var cafImgen = 'images/audifarma.png';
+                            var cafs = [
+                                ['caf 1', 4.807572, -75.731000, 1],
+                                ['caf 2', 4.804423, -75.739497, 2]
+                              ];            
+                            for (var i = 0; i < cafs.length; i++) {
+                              var caf = cafs[i];
+                              var marker = new google.maps.Marker({
+                                position: {lat: caf[1], lng: caf[2]},
+                                map: map,
+                                icon: cafImgen,
+                                title: caf[0],
+                                zIndex: caf[3],
+                                label: caf[3].toString()
+                              });
+                                   
+                                   ventana_detalle(marker, (google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf[1], caf[2]))).toFixed(0).toString());
+
+                            }
+                            
+                        }
+                        
+                        function ventana_detalle(marker, distancia) {
+                            var infowindow = new google.maps.InfoWindow({
+                              content: marker.title+'<br> La Distancia al caf es: '+distancia+' metros'
+                            });
+
+                            marker.addListener('click', function() {
+                              infowindow.open(marker.get('map'), marker);
+                            });
+                          }
+                        
+
                                        
                                           
-                        google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
-                             google.maps.event.addListener(caf, "click", function (e) { infowindowCaf.open(map, this); });
+                        //google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
+                        //google.maps.event.addListener(caf, "click", function (e) { infowindowCaf.open(map, this); });
 
                     }// Fin muestra mapa
                     validarGps();
@@ -116,20 +145,18 @@
     </head>
 
     <body>
-    	<div data-role="page" id="pap" >        	
+    	<div data-role="page" id="pap" style="background-color: #1CAAA0;color: white;text-align: center">        	
 
             <div role="main" class="ui-content">
-		<h1>PAP</h1>
-
-		<p>Tu necesidad, Nuestra prioridad</p>   
+		<img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"><a href="#confirmar" onclick="cargarMapa()"><div class="ui-bar ui-bar-a" style="height:60px">Confirmar Orden</div></a></div>
-                        <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Mis Órdenes</div></div>
+                    <div class="ui-block-a"><a href="#confirmar" onclick="cargarMapa()"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
+                    <div class="ui-block-b">                                            <div class="ui-bar" style="height:150px;background-color: #FF9900;color:white;font-weight:none;padding-top: 20px">Mis Órdenes</div></div>
                 </div><!-- /grid-a -->
 
                 <div class="ui-grid-a">
-                        <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Información de Domicilio</div></div>
-                        <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Utilidades</div></div>
+                        <div class="ui-block-a">                                        <div class="ui-bar" style="height:150px;background-color: #009933;color:white;font-weight:none;padding-top: 20px">Información de Domicilio</div></div>
+                        <div class="ui-block-b">                                        <div class="ui-bar" style="height:150px;background-color: #FF0066;color:white;font-weight:none;padding-top: 20px">Utilidades</div></div>
                 </div><!-- /grid-a -->
 
             </div><!-- /content -->
