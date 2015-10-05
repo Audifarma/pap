@@ -78,24 +78,40 @@
                             var distancia;
                             var cafImgen = 'images/audifarma.png';
                             var cafs = [
-                                ['caf 1', 4.807572, -75.731000, 1],
-                                ['caf 2', 4.804423, -75.739497, 2]
+                                {nombre:'caf 2', latitud:4.807572, longitud:-75.731000, posicion:1,distancia:0},
+                                {nombre:'caf 1', latitud:4.804423, longitud:-75.739497, posicion:2,distancia:0}
                               ];            
                             for (var i = 0; i < cafs.length; i++) {
                               var caf = cafs[i];
                               var marker = new google.maps.Marker({
-                                position: {lat: caf[1], lng: caf[2]},
+                                position: {lat: caf.latitud, lng: caf.longitud},
                                 map: map,
                                 icon: cafImgen,
-                                title: caf[0],
-                                zIndex: caf[3],
-                                label: caf[3].toString()
+                                title: caf.nombre,
+                                zIndex: caf.posicion,
+                                label: caf.posicion.toString()
                               });
-                                   
-                                   ventana_detalle(marker, (google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf[1], caf[2]))).toFixed(0).toString());
-
+                              distancia=google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf.latitud, caf.longitud));
+                              cafs[i].distancia=distancia;     
+                              ventana_detalle(marker, distancia.toFixed(0).toString());
                             }
                             
+                            cafs.sort(function(a, b){
+                                var a1= a.distancia, b1= b.distancia;
+                                if(a1== b1) return 0;
+                                return a1> b1? 1: -1;
+                            });
+                            
+                            for (var i = 0; i < cafs.length; i++) {
+                              var caf = cafs[i];  
+                                $('#cafs2').append('<option value="'+caf.nombre+'">'+caf.nombre+'</option>');
+                            }
+                             $('#cafs2').selectmenu('refresh'); 
+                            
+                            var consola = document.getElementById("c");
+                            for (var i = 0; i < consolas.length; i++) {
+                                consola.options[i].text = new option (consolas[i]);
+                            }
                         }
                         
                         function ventana_detalle(marker, distancia) {
@@ -171,8 +187,9 @@
             <div id="paginaMapa" role="main" class="ui-content">
                 <div id="map-canvas">
                 </div>
-                <div style="position: absolute;top: 75%">
+                <div style="position: absolute;top: 75%;text-align: center">
                     <h3>Caf más cercano según tu posición</h3>
+                    <select id="cafs2" name="select-choice-1"></select>
                     <h3>Detalle</h3>
                     <h3>Nombre</h3>
                     <h3>Número de Orden</h3>
