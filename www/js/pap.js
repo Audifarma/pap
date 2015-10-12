@@ -13,6 +13,8 @@ function registrarUsuario() {
     usuario.nombre = document.getElementById("nombreUsuario").value;
     usuario.apellido = document.getElementById("apellidoUsuario").value;
     usuario.correo = document.getElementById("correoUsuario").value;
+    usuario.clave = document.getElementById("claveUsuario").value;
+    usuario.claveConfirmacion = document.getElementById("claveConfirmacionUsuario").value;
 
     $.ajax({
         url: servicio + 'generic/post/usuario',
