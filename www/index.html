@@ -17,8 +17,8 @@
                     function esperarGps(){
                         cordova.plugins.diagnostic.isLocationEnabled(
                             function(enabled){
-                                if (enabled){setTimeout(validarGps, 2000)}
-                                else {setTimeout(esperarGps, 2000)}
+                                if (enabled){setTimeout(validarGps, 4000)}
+                                else {setTimeout(esperarGps, 4000)}
                         }, function(error){console.error("Error: "+error);});
                     }
                     function opcionesNoGps(buttonIndex) {
@@ -182,7 +182,7 @@
         <div id="confirmar" data-role="page" data-url="map-page">
             <div data-role="header" data-position="fixed">
                 <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
-                <h1>Ordenar</h1>
+                <h1>Confirmar</h1>
             </div>
             <div id="paginaMapa" role="main" class="ui-content">
                 <div id="map-canvas">
