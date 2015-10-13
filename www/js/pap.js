@@ -5,11 +5,14 @@
  */
 
 document.write("<script type='text/javascript' src='util.js'></script>");
+
 var usuario = {
-    nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null
+    codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null
 };
 
 function registrarUsuario() {
+    usuario.codTipoDocumento = document.getElementById("tipoDocumentoUsuario").value;
+    usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
     usuario.nombre = document.getElementById("nombreUsuario").value;
     usuario.apellido = document.getElementById("apellidoUsuario").value;
     usuario.correo = document.getElementById("correoUsuario").value;
@@ -24,7 +27,7 @@ function registrarUsuario() {
         data: JSON.stringify(usuario),
         success: function (resp) {
             //función cargar cupones usuario.
-            alert('Usuario registrado')
+            alert('Usuario registrado');
         },
         error: function (e) {
             var mensaje = message(e);
