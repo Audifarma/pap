@@ -12,17 +12,23 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
         <script src="./js/util.js"></script>
         <script src="./js/pap.js"></script>
-        
+
         <script>
             function cargarMapa() {
                 $(document).on("pageinit", "#confirmar", function (e, data) {
                     var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
                     function esperarGps() {
                         cordova.plugins.diagnostic.isLocationEnabled(
-                            function(enabled){
-                                if (enabled){setTimeout(validarGps, 4000)}
-                                else {setTimeout(esperarGps, 4000)}
-                        }, function(error){console.error("Error: "+error);});
+                                function (enabled) {
+                                    if (enabled) {
+                                        setTimeout(validarGps, 4000)
+                                    }
+                                    else {
+                                        setTimeout(esperarGps, 4000)
+                                    }
+                                }, function (error) {
+                            console.error("Error: " + error);
+                        });
                     }
                     function opcionesNoGps(buttonIndex) {
                         if (buttonIndex == 1) {
@@ -221,7 +227,13 @@
                 <h1>Registro Usuario</h1>
             </div>
             <div>
-                <p>Tipo de Documento:<input id="tipoDocumentoUsuario"/></p>
+                <p>Tipo de Documento:
+                    <select id="tipoDocumentoUsuario">
+                        <option value="1">CEDULA DE CIUDADANIA</option>
+                        <option value="2">TARJETA DE IDENTIDAD</option>                        
+                        <option value="4">CEDULA DE EXTRANJERIA</option>
+                    </select>
+                </p>
                 <p>Documento:<input id="documentoUsuario"/></p>
                 <p>Nombre(s): <input id="nombreUsuario"/></p>
                 <p>Apellido(s): <input id="apellidoUsuario"/></span></p>
