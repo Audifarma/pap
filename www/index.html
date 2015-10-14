@@ -122,8 +122,8 @@
 
                         function ventana_detalle(marker, distancia) {
                             var infowindow = new google.maps.InfoWindow({
-                                content: '<div style="color: black;">'+marker.title + '<br> La Distancia al caf es: ' + distancia + ' metros</div>'
-                            }); 
+                                content: '<div style="color: black;">' + marker.title + '<br> La Distancia al caf es: ' + distancia + ' metros</div>'
+                            });
 
                             marker.addListener('click', function () {
                                 infowindow.open(marker.get('map'), marker);
@@ -172,7 +172,7 @@
             <div role="main" class="ui-content">
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" onclick="cargarMapa(),location.href='#confirmar'"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
+                    <div class="ui-block-a" onclick="cargarMapa(), location.href = '#confirmar'"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
                     <div class="ui-block-b">                                            <div class="ui-bar" style="height:150px;background-color: #FF9900;color:white;font-weight:none;padding-top: 20px">Mis Órdenes</div></div>
                 </div><!-- /grid-a -->
 
@@ -187,7 +187,7 @@
                             Ingresar
                         </div>
                     </div>
-                    <div class="ui-block-b" onclick="location.href='#divRegistrarUsuario'">
+                    <div class="ui-block-b" onclick="location.href = '#divRegistrarUsuario'">
                         <div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">
                             Registrar Usuario
                         </div>
@@ -233,10 +233,19 @@
                 </p>
                 <p>Documento:<input id="documentoUsuario"/></p>
                 <p>Nombre(s): <input id="nombreUsuario"/></p>
-                <p>Apellido(s): <input id="apellidoUsuario"/></span></p>
-                <p>Correo: <input id="correoUsuario"/></span></p>
-                <p>Clave: <input id="claveUsuario" type="password"/></span></p>
-                <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></span></p>
+                <p>Apellido(s): <input id="apellidoUsuario"/></p>
+                <p>Correo: <input id="correoUsuario"/></p>
+                <p>Clave: <input id="claveUsuario" type="password"/></p>
+                <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></p>
+                <p>Sexo:</p>
+                <div id="radio">
+                    <input type="radio" id="radio1" name="radio" checked="checked" value="F" /><label for="radio1">Femenino</label>
+                    <input type="radio" id="radio2" name="radio" value="M"/><label for="radio2">Masculino</label>
+                </div>
+                
+
+
+
                 <button class="btn btn-block" onclick="registrarUsuario()">
                     Crear Usuario
                 </button>
