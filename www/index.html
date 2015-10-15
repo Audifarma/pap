@@ -182,7 +182,7 @@
                 </div><!-- /grid-a -->
 
                 <div class="ui-grid-a">
-                    <div class="ui-block-a">                                        
+                    <div class="ui-block-a" onclick="location.href = '#divLogin'">                                        
                         <div class="ui-bar" style="height:150px;background-color: #FF9900;color:white;font-weight:none;padding-top: 20px">
                             Ingresar
                         </div>
@@ -215,6 +215,21 @@
                         Confirmar y Recoger
                     </button>
                 </div>
+            </div>
+        </div>
+        
+        <div id="divLogin" data-role="page" >
+            <div data-role="header" data-position="fixed">
+                <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
+                <h1>Iniciar Sesion</h1>
+            </div>
+            <div>                
+                <p>Documento:<input id="documentoUsuario"/></p>                
+                <p>Clave: <input id="claveUsuario" type="password"/></p>             
+                <button class="btn btn-block" onclick="iniciarSesion
+                    ()">
+                    Iniciar Sesion
+                </button>
             </div>
         </div>
 

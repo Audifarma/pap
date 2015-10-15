@@ -45,3 +45,27 @@ function registrarUsuario() {
         }
     });
 }
+
+function iniciarSesion() {   
+    usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;    
+    usuario.clave = document.getElementById("claveUsuario").value;
+    $.ajax({
+        url: servicio + 'generic/post/validarUsuario',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(usuario),
+        success: function (resp) {
+            //función cargar cupones usuario.
+            alert('Usuario logueado');
+        },
+        error: function (e) {
+            var mensaje = message(e);
+            if (mensaje == null) {
+                mensajeSoporte();
+            } else {
+                alert(mensaje);
+            }
+        }
+    });
+}
