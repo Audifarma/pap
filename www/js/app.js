@@ -8,4 +8,5 @@ document.write("<script type='text/javascript' src='pap.js'></script>");
 
 $(document).ready(function () {
     cargarClientes();
+    cargarDepartamentos();
 });
