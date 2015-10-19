@@ -24,8 +24,7 @@ function registrarUsuario() {
     if ($('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
-    alert($('#radio1:checked').val());
-    alert($('#radio2:checked').val());
+    
     $.ajax({
         url: servicio + 'generic/post/usuario',
         type: 'POST',
