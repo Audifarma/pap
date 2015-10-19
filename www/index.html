@@ -242,14 +242,22 @@
                     </select>
                 </p>
                 
-                <p>Correo: <input id="correoUsuario"/></p>
-                <p>Clave: <input id="claveUsuario" type="password"/></p>
-                <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></p>
                 <p>Sexo:</p>
                 <div id="radio">
                     <input type="radio" id="radio1" name="radio" checked="checked" value="F" /><label for="radio1">Femenino</label>
                     <input type="radio" id="radio2" name="radio" value="M"/><label for="radio2">Masculino</label>
                 </div>
+                
+                <p>Departamento Residencia:
+                    <select id="departamentoUsuario">
+                        <option value="-1">Seleccione</option>
+                    </select>
+                </p>
+                
+                <p>Correo: <input id="correoUsuario"/></p>
+                <p>Clave: <input id="claveUsuario" type="password"/></p>
+                <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></p>
+                
                 
                 <button class="btn btn-block" onclick="registrarUsuario()">
                     Crear Usuario
