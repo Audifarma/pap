@@ -32,6 +32,28 @@ function cargarClientes() {
     }
 }
 
+function cargarDepartamentos() {
+    if ($('#departamentoUsuario').has('option').length <= 1) {
+        $.ajax({
+            url: servicio + 'generic/get/departamentos',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (resp) {
+                for (var n = 0; n < resp.length; n++)
+                {
+                    var object = JSON.parse(resp[n]);
+                    $('#departamentoUsuario').append($('<option>', {
+                        value: object.codigo,
+                        text: object.nombre
+                    }));
+                }
+
+            }
+        });
+    }
+}
+
 function registrarUsuario() {
     usuario.codTipoDocumento = document.getElementById("tipoDocumentoUsuario").value;
     usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
