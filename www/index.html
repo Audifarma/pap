@@ -12,6 +12,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
         <script src="./js/util.js"></script>
         <script src="./js/pap.js"></script>
+        <script src="./js/app.js"></script>
 
         <script>
             function cargarMapa() {
@@ -234,6 +235,13 @@
                 <p>Documento:<input id="documentoUsuario"/></p>
                 <p>Nombre(s): <input id="nombreUsuario"/></p>
                 <p>Apellido(s): <input id="apellidoUsuario"/></p>
+                
+                <p>EPS:
+                    <select id="epsUsuario">
+                        <option value="-1">Seleccione</option>
+                    </select>
+                </p>
+                
                 <p>Correo: <input id="correoUsuario"/></p>
                 <p>Clave: <input id="claveUsuario" type="password"/></p>
                 <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></p>
