@@ -54,6 +54,32 @@ function cargarDepartamentos() {
     }
 }
 
+function cargarMunicipios(codDepartamento) {
+    $('#municipioUsuario').find('option').remove();
+    $('#municipioUsuario').append($('<option>', {
+        value: -1,
+        text: 'Seleccione'
+    }, true));
+    $.ajax({
+        url: servicio + 'generic/get/departamentos',
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var object = JSON.parse(resp[n]);
+                $('#municipioUsuario').append($('<option>', {
+                    value: object.codigo,
+                    text: object.nombre
+                }));
+            }
+        }
+    });
+    $('#municipioUsuario').selectmenu('refresh');
+}
+
+
 function registrarUsuario() {
     usuario.codTipoDocumento = document.getElementById("tipoDocumentoUsuario").value;
     usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
