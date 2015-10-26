@@ -249,7 +249,13 @@
                 </div>
                 
                 <p>Departamento Residencia:
-                    <select id="departamentoUsuario">
+                    <select id="departamentoUsuario" onchange="cargarMunicipios(this.value)">
+                        <option value="-1">Seleccione</option>
+                    </select>
+                </p>
+                
+                <p>Municipio Residencia:
+                    <select id="municipioUsuario" >
                         <option value="-1">Seleccione</option>
                     </select>
                 </p>
