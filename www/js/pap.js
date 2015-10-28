@@ -52,8 +52,8 @@ function iniciarSesion() {
     $.ajax({
         url: servicio + 'generic/post/validarUsuario',
         type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
+            dataType: 'json',
+            contentType: 'application/json',
         data: JSON.stringify(usuario),
         success: function (resp) {
             //función cargar cupones usuario.
