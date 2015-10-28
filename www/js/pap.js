@@ -10,6 +10,7 @@ var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
 };
 
+
 function cargarClientes() {
     if ($('#epsUsuario').has('option').length <= 1) {
         $.ajax({
@@ -94,7 +95,7 @@ function registrarUsuario() {
     if ($('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
-
+    
     $.ajax({
         url: servicio + 'generic/post/usuario',
         type: 'POST',
@@ -114,4 +115,35 @@ function registrarUsuario() {
             }
         }
     });
+}
+
+function cargarAutorizacionesUsuario() {
+    usuario.codigo = '123';
+    $.ajax({
+     url: servicio + 'generic/get/AutorizacionesUsuario',
+     type: 'POST',
+     dataType: 'json',
+     contentType: 'application/json',
+     data: JSON.stringify(usuario),
+     success: function (resp) {
+         listarAutorizacionesUsuario(resp);
+     },
+     error: function (e) {
+         var mensaje = message(e);
+         if (mensaje == null) {
+             mensajeSoporte();
+         } else {
+             alert(mensaje);
+         }
+     }
+ }); 
+}
+
+function listarAutorizacionesUsuario(resp) {
+    for (var i = 0; i < resp.length; i++) {
+        var autorizacion = JSON.parse(resp[i]);
+        $('#autorizaciones').append('<option value="' + autorizacion.codAutorizacion + '">' + autorizacion.codAutorizacion + '</option>');
+    }
+    $('#autorizaciones').selectmenu('refresh');    
+
 }

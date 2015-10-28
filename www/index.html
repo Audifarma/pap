@@ -12,9 +12,13 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
         <script src="./js/util.js"></script>
         <script src="./js/pap.js"></script>
-        <script src="./js/app.js"></script>
 
         <script>
+            function iniciarConfirmacion()
+            {
+                cargarMapa();
+                cargarAutorizacionesUsuario();
+            }
             function cargarMapa() {
                 $(document).on("pageinit", "#confirmar", function (e, data) {
                     var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
@@ -140,6 +144,7 @@
                     }// Fin muestra mapa
                     validarGps();
                 });
+                
             }
         </script>
         <style>
@@ -173,7 +178,7 @@
             <div role="main" class="ui-content">
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <div class="ui-grid-a">
-                    <div class="ui-block-a" onclick="cargarMapa(), location.href = '#confirmar'"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
+                    <div class="ui-block-a" onclick="iniciarConfirmacion(), location.href = '#confirmar'"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
                     <div class="ui-block-b">                                            <div class="ui-bar" style="height:150px;background-color: #FF9900;color:white;font-weight:none;padding-top: 20px">Mis Órdenes</div></div>
                 </div><!-- /grid-a -->
 
@@ -211,7 +216,8 @@
                     <h3>Caf más cercano según tu posición</h3>
                     <select id="cafs" name="select-choice-1" style="background-color: #660099;color: white;"></select>
                     <h3>Nombre</h3>&nbsp;&nbsp;&nbsp;&nbsp;Juan David Montoya
-                    <h3>Número de Orden</h3>&nbsp;&nbsp;&nbsp;&nbsp;3432
+                    <h3>Autorización </h3>
+                    <select id="autorizaciones" name="select-choice-2" style="background-color: #660099;color: white;"></select>
                     <button class="ui-btn ui-btn-b ui-corner-all" style="background-color: #660099;color: white;border: none">
                         Confirmar y Recoger
                     </button>
