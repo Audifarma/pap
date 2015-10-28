@@ -10,6 +10,76 @@ var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
 };
 
+function cargarClientes() {
+    if ($('#epsUsuario').has('option').length <= 1) {
+        $.ajax({
+            url: servicio + 'generic/get/clientes',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (resp) {
+                for (var n = 0; n < resp.length; n++)
+                {
+                    var object = JSON.parse(resp[n]);
+                    $('#epsUsuario').append($('<option>', {
+                        value: object.codigo,
+                        text: object.nombre
+                    }));
+                }
+
+            }
+        });
+    }
+}
+
+function cargarDepartamentos() {
+    if ($('#departamentoUsuario').has('option').length <= 1) {
+        $.ajax({
+            url: servicio + 'generic/get/departamentos',
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (resp) {
+                for (var n = 0; n < resp.length; n++)
+                {
+                    var object = JSON.parse(resp[n]);
+                    $('#departamentoUsuario').append($('<option>', {
+                        value: object.codigo,
+                        text: object.nombre
+                    }));
+                }
+
+            }
+        });
+    }
+}
+
+function cargarMunicipios(codDepartamento) {
+    $('#municipioUsuario').find('option').remove();
+    $('#municipioUsuario').append($('<option>', {
+        value: -1,
+        text: 'Seleccione'
+    }, true));
+    $.ajax({
+        url: servicio + 'generic/get/departamentos',
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var object = JSON.parse(resp[n]);
+                $('#municipioUsuario').append($('<option>', {
+                    value: object.codigo,
+                    text: object.nombre
+                }));
+            }
+        }
+    });
+    $('#municipioUsuario').selectmenu('refresh');
+}
+
+
 function registrarUsuario() {
     usuario.codTipoDocumento = document.getElementById("tipoDocumentoUsuario").value;
     usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
@@ -24,7 +94,7 @@ function registrarUsuario() {
     if ($('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
-    
+
     $.ajax({
         url: servicio + 'generic/post/usuario',
         type: 'POST',
