@@ -10,6 +10,9 @@ var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
 };
 
+var solicitudRegistro = {
+    codSolicitudRegistro: 0, codCliente: 0, codDpto: 0, codCiudad: 0, fechaRegistro: null, horaRegistro: null
+};
 
 function cargarClientes() {
     if ($('#epsUsuario').has('option').length <= 1) {
@@ -89,6 +92,7 @@ function registrarUsuario() {
     usuario.correo = document.getElementById("correoUsuario").value;
     usuario.clave = document.getElementById("claveUsuario").value;
     usuario.claveConfirmacion = document.getElementById("claveConfirmacionUsuario").value;
+    usuario.fechaNacimiento = document.getElementById("fechaNacimientoUsuario").value;
     if ($('#radio1:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio1:checked').val();
     }
@@ -96,12 +100,19 @@ function registrarUsuario() {
         usuario.sexo = $('#radio2:checked').val();
     }
 
+    solicitudRegistro.codCliente = document.getElementById("epsUsuario").value;
+    solicitudRegistro.codDpto = document.getElementById("departamentoUsuario").value;
+    solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
+
+//    var data = JSON.stringify({cupon: cupon, centroComercial: centroComercial, tienda: tienda, categoria: categoria, usuario: usuario});
+    var data = JSON.stringify({usuario: usuario, solicitudRegistro: solicitudRegistro});
+
     $.ajax({
         url: servicio + 'generic/post/usuario',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify(usuario),
+        data: data,
         success: function (resp) {
             //función cargar cupones usuario.
             alert('Usuario registrado');
@@ -145,5 +156,31 @@ function listarAutorizacionesUsuario(resp) {
         $('#autorizaciones').append('<option value="' + autorizacion.codAutorizacion + '">' + autorizacion.codAutorizacion + '</option>');
     }
     $('#autorizaciones').selectmenu('refresh');
+}
 
+function getAcuerdo() {
+    acuerdo = "Entre las partes de conviene que: \n\
+\n\
+1. AUDIFARMA S.A, es una empresa dedicada al suministro de medicamentos y debido a que actúa como operador logístico de la EPS a la que pertenezco, es quien realiza el proceso de dispensación de medicamentos que me son prescritos.\
+\n\n\
+2. Que AUDIFARMA diseñó el Sistema de Información de Usuarios con el fin de publicar información general de interés para todas las personas a las que se les dispensan medicamentos, el cual es  de acceso libre.\
+\n\n\
+3. Que cada usuario tiene derecho a consultar información única y privada sobre el proceso de entrega de sus medicamentos, para lo cual el usuario se debe Registrar y crear usuario y clave, la cual es única por persona.\
+\n\n\
+4. Que para acceder a esta información, el Usuario necesariamente debe registrar como datos obligatorios, la dirección del correo electrónico y teléfonos de contacto. Con base en lo anterior y teniendo en cuenta que reúno las condiciones de Usuario de la empresa AUDIFARMA S.A., notifico que obrando libre y voluntariamente bajo mi propio nombre, en uso del pleno de mis facultades legales e intelectuales, por medio del presente escrito, MANIFIESTO Y DECLARO:\
+\n\n\
+1. Que una vez leído el documento denominado ACUERDO DE INGRESO AL SISTEMA Y POLÍTICAS DE USO DE LA INFORMACIÓN de la empresa Audifarma S.A., estoy de acuerdo con su contenido y lo acepto en su totalidad.\
+\n\n\
+2. Que me comprometo a dar uso adecuado a la información que se encuentra en este sistema.\
+\n\n\
+3. Que me comprometo a Utilizar la información sólo como medio de ayuda para acceder a la dispensación de sus medicamentos.\
+\n\n\
+4. Que me responsabilizo del uso que dé a la información extraída del sistema de Información de Usuarios de Audifarma con su usuario y clave.\
+\n\n\
+5. Que me comprometo a No compartir su usuario y clave de acceso con otras persona.\
+\n\n\
+6. Que me comprometo a Contactar a Audifarma en caso de evidenciar algún fallo en la información extraída.\
+\n\n\
+7. Que me comprometo a Permitir a Audifarma el uso de la información consignada al momento de su registro para efectos de contacto como correo electrónico y teléfonos de contacto.";
+    return acuerdo;
 }
