@@ -62,7 +62,7 @@ function cargarMunicipios(codDepartamento) {
         text: 'Seleccione'
     }, true));
     $.ajax({
-        url: servicio + 'generic/get/departamentos',
+        url: servicio + 'generic/get/municipios/' + codDepartamento,
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
@@ -95,7 +95,7 @@ function registrarUsuario() {
     if ($('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
-    
+
     $.ajax({
         url: servicio + 'generic/post/usuario',
         type: 'POST',
@@ -120,23 +120,23 @@ function registrarUsuario() {
 function cargarAutorizacionesUsuario() {
     usuario.codigo = '123';
     $.ajax({
-     url: servicio + 'generic/get/AutorizacionesUsuario',
-     type: 'POST',
-     dataType: 'json',
-     contentType: 'application/json',
-     data: JSON.stringify(usuario),
-     success: function (resp) {
-         listarAutorizacionesUsuario(resp);
-     },
-     error: function (e) {
-         var mensaje = message(e);
-         if (mensaje == null) {
-             mensajeSoporte();
-         } else {
-             alert(mensaje);
-         }
-     }
- }); 
+        url: servicio + 'generic/get/AutorizacionesUsuario',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(usuario),
+        success: function (resp) {
+            listarAutorizacionesUsuario(resp);
+        },
+        error: function (e) {
+            var mensaje = message(e);
+            if (mensaje == null) {
+                mensajeSoporte();
+            } else {
+                alert(mensaje);
+            }
+        }
+    });
 }
 
 function listarAutorizacionesUsuario(resp) {
@@ -144,6 +144,6 @@ function listarAutorizacionesUsuario(resp) {
         var autorizacion = JSON.parse(resp[i]);
         $('#autorizaciones').append('<option value="' + autorizacion.codAutorizacion + '">' + autorizacion.codAutorizacion + '</option>');
     }
-    $('#autorizaciones').selectmenu('refresh');    
+    $('#autorizaciones').selectmenu('refresh');
 
 }
