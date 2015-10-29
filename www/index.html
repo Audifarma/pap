@@ -276,9 +276,11 @@
                 <p>Clave Confirmación: <input id="claveConfirmacionUsuario" type="password"/></p>
 
                 <textarea rows="15" cols="50" id="textareaAcuerdo"
-                          readonly style="resize: none; overflow-y: scroll;">
+                          readonly style="resize: none;">
                 </textarea>
                 
+                <input type="checkbox" id="acuerdoUsuario" value="AceptaAcuerdo"/>
+                <label for="acuerdoUsuario">He leído y acepto.</label>
                 
 
                 <button class="btn btn-block" onclick="registrarUsuario()">
