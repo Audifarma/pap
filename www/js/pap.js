@@ -104,6 +104,12 @@ function registrarUsuario() {
     solicitudRegistro.codDpto = document.getElementById("departamentoUsuario").value;
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
 
+    if (!$('#acuerdoUsuario').is(":checked")) {
+        alert('Acepta los terminos y condiciones');
+        return;
+    }
+
+
 //    var data = JSON.stringify({cupon: cupon, centroComercial: centroComercial, tienda: tienda, categoria: categoria, usuario: usuario});
     var data = JSON.stringify({usuario: usuario, solicitudRegistro: solicitudRegistro});
 
@@ -184,14 +190,14 @@ function getAcuerdo() {
 7. Que me comprometo a Permitir a Audifarma el uso de la información consignada al momento de su registro para efectos de contacto como correo electrónico y teléfonos de contacto.";
     return acuerdo;
 }
-function iniciarSesion() {   
-    usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;    
+function iniciarSesion() {
+    usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
     usuario.clave = document.getElementById("claveUsuario").value;
     $.ajax({
         url: servicio + 'generic/post/validarUsuario',
         type: 'POST',
-            dataType: 'json',
-            contentType: 'application/json',
+        dataType: 'json',
+        contentType: 'application/json',
         data: JSON.stringify(usuario),
         success: function (resp) {
             //función cargar cupones usuario.
