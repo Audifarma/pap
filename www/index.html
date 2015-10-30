@@ -252,7 +252,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div data-role="page" id="page-signin">
             <div data-role="header" data-theme="c" data-position="fixed">
                 <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
@@ -325,12 +325,13 @@
                 <textarea rows="15" cols="50" id="textareaAcuerdo"
                           readonly style="resize: none;">
                 </textarea>
-                
-                <input type="checkbox" id="acuerdoUsuario" value="AceptaAcuerdo"/>
-                <label for="acuerdoUsuario">He leído y acepto.</label>
-                
 
-                <button class="btn btn-block" onclick="registrarUsuario()">
+                <input type="checkbox" id="acuerdoUsuario" value="AceptaAcuerdo"
+                       onchange="document.getElementById('bnRegistrarUsuario').focus()"/>
+                <label for="acuerdoUsuario">He leído y acepto.</label>
+
+
+                <button id="bnRegistrarUsuario" class="btn btn-block" onclick="registrarUsuario()">
                     Crear Usuario
                 </button>
             </div>
