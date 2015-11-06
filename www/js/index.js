@@ -37,6 +37,7 @@ $(document).on("mobileinit", function (event, ui) {
 
 //app.signUpController = new pap.SignUpController();
 app.signInController = new pap.SignInController();
+app.registroUsuarioController = new pap.RegistroUsuarioController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
@@ -60,18 +61,28 @@ $(document).delegate("page-bookings", "pagebeforecreate", function () {
     app.bookingsController.showBookings();
 });
 
+$(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
+    app.registroUsuarioController.init();
+});
+
 $(document).on("pagecontainerbeforechange", function (event, ui) {
 
-    if (typeof ui.toPage !== "object") return;
-    
+    if (typeof ui.toPage !== "object")
+        return;
+
     switch (ui.toPage.attr("id")) {
         case "page-index":
             if (!ui.prevPage) {
                 // Check session.keepSignedIn and redirect to main menu.
                 var session = pap.Session.getInstance().get(),
-                    today = new Date();
+                        today = new Date();
                 if (session && session.keepSignedIn && new Date(session.expirationDate).getTime() > today.getTime()) {
-                    ui.toPage = $("#pap");                }
+                    ui.toPage = $("#pap");
+                }
             }
     }
 });
+
+function validarRegistroUsuario(usuario, solicitudRegistro) {
+    return app.registroUsuarioController.validarRegistroUsuario(usuario, solicitudRegistro);
+}
