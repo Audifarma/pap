@@ -5,6 +5,7 @@
  */
 
 document.write("<script type='text/javascript' src='util.js'></script>");
+document.write("<script type='text/javascript' src='index.js'></script>");
 
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
@@ -107,7 +108,12 @@ function registrarUsuario() {
     solicitudRegistro.codCliente = document.getElementById("epsUsuario").value;
     solicitudRegistro.codDpto = document.getElementById("departamentoUsuario").value;
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
-
+    
+    if(validarRegistroUsuario(usuario, solicitudRegistro)){
+        alert('Por favor ingresa los datos requeridos.')
+        return;
+    }
+    
     if (!$('#acuerdoUsuario').is(":checked")) {
         alert('Acepta los terminos y condiciones');
         return;
@@ -193,7 +199,8 @@ function getAcuerdo() {
 \n\n\
 7. Que me comprometo a Permitir a Audifarma el uso de la información consignada al momento de su registro para efectos de contacto como correo electrónico y teléfonos de contacto.";
     return acuerdo;
-}
+};
+
 function iniciarSesion() {
     usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
     usuario.clave = document.getElementById("claveUsuario").value;
@@ -216,4 +223,4 @@ function iniciarSesion() {
             }
         }
     });
-}
+};
