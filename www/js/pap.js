@@ -7,7 +7,8 @@
 document.write("<script type='text/javascript' src='util.js'></script>");
 
 var usuario = {
-    codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
+    codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
+    clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null
 };
 
 var solicitudRegistro = {
@@ -99,6 +100,9 @@ function registrarUsuario() {
     if ($('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
+    usuario.direccion = $("#direccionUsuario").val();
+    usuario.telefono = $("#telefonoUsuario").val();
+    usuario.telefonoCelular = $("#celularUsuario").val();
 
     solicitudRegistro.codCliente = document.getElementById("epsUsuario").value;
     solicitudRegistro.codDpto = document.getElementById("departamentoUsuario").value;
