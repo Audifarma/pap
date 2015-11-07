@@ -34,7 +34,7 @@
             }
             function cargarMapa() {
                 $(document).on("pageinit", "#confirmar", function (e, data) {
-                    var defaultPos = new google.maps.LatLng(4.807259, -75.744327);
+                    var defaultPos = new google.maps.LatLng(4.807259, -75.744327); // Bobota
                     function esperarGps() {
                         cordova.plugins.diagnostic.isLocationEnabled(
                                 function (enabled) {
@@ -80,6 +80,7 @@
                         else {
                             MuestraMapa(defaultPos);  // No soporta geolocalizacion y dibuja el mapa en posicion Default
                         }
+
                     }
                     //FUNCION DIBUJAR MAPa
                     function MuestraMapa(latlng) {
@@ -93,6 +94,7 @@
                         var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
                         var infowindow = new google.maps.InfoWindow({position: latlng, content: '<p>Mi posición</p>' + latlng});
                         var infowindowCaf = new google.maps.InfoWindow({position: latlng, content: '<p>Nombre de Caf</p>'});
+                        var geocoder = new google.maps.Geocoder;
 
                         var marker = new google.maps.Marker({
                             position: latlng,
@@ -101,6 +103,7 @@
                             animation: google.maps.Animation.DROP});
 
                         setMarkers(map);
+                        obtenerCiudad(geocoder, latlng);
                         function setMarkers(map) {
                             var distancia;
                             var cafImgen = 'images/audifarma.png';
@@ -135,7 +138,7 @@
                                 $('#cafs').append('<option value="' + caf.nombre + '">' + caf.nombre + '</option>');
                             }
                             $('#cafs').selectmenu('refresh');
-
+                            
                         }
 
                         function ventana_detalle(marker, distancia) {
@@ -147,10 +150,29 @@
                                 infowindow.open(marker.get('map'), marker);
                             });
                         }
+                        
+                        function obtenerCiudad(geocoder,latlng) {
+                          geocoder.geocode({'location': latlng}, function(results, status) {
+                            if (status === google.maps.GeocoderStatus.OK) {
+                                if (results) {
+                                    var result = results[0];
+                                    var city = "";
+                                    for(var i=0, len=result.address_components.length; i<len; i++) {
+                                            var ac = result.address_components[i];
+                                            if(ac.types.indexOf('locality') >= 0) city = ac.long_name;
+                                    }
+                                    if(city != '') {
+                                            alert('Ciudad '+city);
+                                    }
+                                } else {
+                                  window.alert('No se encontró la ciudad');
+                                }
+                            } else {
+                              window.alert('Se generó un error: ' + status);
+                            }
+                          });
 
-
-
-
+                        }
                         //google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
                         //google.maps.event.addListener(caf, "click", function (e) { infowindowCaf.open(map, this); });
 
