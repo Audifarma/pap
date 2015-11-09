@@ -1,5 +1,6 @@
-var servicio = "http://190.14.226.155:8095/paprs/webresources/";
+//var servicio = "http://190.14.226.155:8095/paprs/webresources/";
 //var servicio = "http://localhost:9090/webresources/";
+var servicio = "http://localhost:8080/webresources/";
 
 function message(e) {
     var html = $.parseHTML(e.responseText)

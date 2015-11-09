@@ -174,6 +174,27 @@ function listarAutorizacionesUsuario(resp) {
     $('#autorizaciones').selectmenu('refresh');
 }
 
+function cargarCafsCiudad(ciudad) {
+    var cafsResp =[];
+    $.ajax({
+        url: servicio + 'generic/get/CafsCiudad/' + ciudad,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: false,
+        success: function (resp) {
+            var cafs =[];
+            for (var i = 0; i < resp.length; i++) {
+                var object = JSON.parse(resp[i]);
+                cafs.push({codigo:object.codigo,nombre:object.nombre,latitud:object.latitud,longitud:object.longitud,distancia:0});
+            }
+            cafsResp=cafs;
+            
+        }
+    });
+    return cafsResp;
+}
+
 function getAcuerdo() {
     acuerdo = "Entre las partes de conviene que: \n\
 \n\
