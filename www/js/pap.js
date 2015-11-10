@@ -6,6 +6,7 @@
 
 document.write("<script type='text/javascript' src='util.js'></script>");
 document.write("<script type='text/javascript' src='index.js'></script>");
+document.write("<script type='text/javascript' src='settings.js'></script>");
 
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
