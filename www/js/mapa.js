@@ -5,10 +5,10 @@ function cargarMapa() {
             cordova.plugins.diagnostic.isLocationEnabled(
                     function (enabled) {
                         if (enabled) {
-                            setTimeout(validarGps, 4000)
+                            setTimeout(validarGps, 5000)
                         }
                         else {
-                            setTimeout(esperarGps, 4000)
+                            setTimeout(esperarGps, 5000)
                         }
                     }, function (error) {
                 console.error("Error: " + error);

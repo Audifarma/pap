@@ -61,11 +61,8 @@
 
     <body>
         <div data-role="page" id="page-index">
-            <div data-role="header" data-theme="c" data-position="fixed">
-                <h1>PAP</h1>
-            </div><!-- /header -->
             <div role="main" class="ui-content">
-                <h2 class="bi-text-center">Bienvenido!</h2>
+                <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <p class="bi-top-margin-1-5"><b>Usuario Existente</b></p>
                 <a href="#page-signin" class="ui-btn ui-btn-b ui-corner-all">Inicia Sesión</a>
                 <p class="bi-top-margin-1-5"><b>Aún no tienes cuenta?</b></p>
@@ -73,9 +70,9 @@
                 <p></p>
             </div><!-- /content -->
         </div><!-- /page -->
-        <div data-role="page" id="pap" style="background-color: #1CAAA0;color: white;text-align: center">        	
+        <div data-role="page" id="pap">        	
 
-            <div role="main" class="ui-content">
+            <div role="main" class="ui-content" style="padding:0%">
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <div class="ui-grid-a">
                     <div class="ui-block-a" onclick="iniciarConfirmacion(), location.href = '#confirmar'"><div class="ui-bar" style="height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">Confirmar Orden</div></a></div>
@@ -104,22 +101,22 @@
 
         </div>
 
-        <div id="confirmar" data-role="page" data-url="map-page" style="background-color: #1CAAA0;color: white">
-            <div data-role="header" data-position="fixed" style="background-color: #660099;color: white;">
+        <div id="confirmar" data-role="page" data-url="map-page" >
+            <div data-role="header" data-position="fixed" >
                 <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
                 <h1>Confirmar</h1>
             </div>
             <div id="paginaMapa" role="main" class="ui-content">
                 <div id="map-canvas">
                 </div>
-                <div style="position: absolute;top: 75%;padding: 5%">
+                <div style="position: absolute;top: 75%;">
                     <h3>Ciudad</h3>
-                    <div id="ciudad">hola</div>
+                    <div id="ciudad"></div>
                     <h3>Caf más cercano según tu posición</h3>
-                    <select id="cafs" name="select-choice-1" style="background-color: #660099;color: white;"></select>
+                    <select id="cafs" name="select-choice-1" ></select>
                     <h3>Nombre</h3>&nbsp;&nbsp;&nbsp;&nbsp;Juan David Montoya
                     <h3>Autorización </h3>
-                    <select id="autorizaciones" name="select-choice-2" style="background-color: #660099;color: white;"></select>
+                    <select id="autorizaciones" name="select-choice-2" ></select>
                     <button class="ui-btn ui-btn-b ui-corner-all" style="background-color: #660099;color: white;border: none">
                         Confirmar y Recoger
                     </button>
@@ -128,11 +125,8 @@
         </div>
 
         <div data-role="page" id="page-signin">
-            <div data-role="header" data-theme="c" data-position="fixed">
-                <a href="#page-index" data-icon="home" data-iconpos="notext" data-transition="slide" data-direction="reverse"></a>
-                <h1>pap</h1>
-            </div>
             <div role="main" class="ui-content">
+                <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <h3>Iniciar Sesión</h3>
                 <div id="ctn-err" class="bi-invisible"></div>
                 <label for="txt-documento">Documento:</label>
