@@ -42,9 +42,7 @@ app.autorizacionController = new pap.AutorizacionController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
-
     app.signInController.init();
-
     app.signInController.$btnSubmit.off("tap").on("tap", function () {
         app.signInController.onSignInCommand();
     });
