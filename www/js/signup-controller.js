@@ -1,4 +1,4 @@
-﻿var pap = pap || {};
+var pap = pap || {};
 
 pap.SignUpController = function () {
 
