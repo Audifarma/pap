@@ -70,6 +70,10 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
 });
 
+$(document).delegate("#pap", "pagebeforecreate", function () {
+    $("#usuario-registrado").text(pap.Session.getInstance().get().userProfileModel);
+});
+
 $(document).on("pagecontainerbeforechange", function (event, ui) {
 
     if (typeof ui.toPage !== "object")
