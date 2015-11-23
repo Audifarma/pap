@@ -1,13 +1,13 @@
-var papUsuario = papUsuario || {};
+var pap = pap || {};
 
-papUsuario.AutorizacionController = function () { 
+pap.AutorizacionController = function () { 
     this.$autorizacionPage = null;
 };
 
-papUsuario.AutorizacionController.prototype.init = function () {
+pap.AutorizacionController.prototype.init = function () {
     this.$autorizacionPage = $("#confirmar");  
 };
 
-papUsuario.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
+pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
     
 };
