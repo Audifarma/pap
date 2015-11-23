@@ -68,7 +68,9 @@ function cargarMapa() {
                 title: "Mi posición",
                 animation: google.maps.Animation.DROP});
             
+            cargarDepartamentosMapa();
             obtenerCiudad(geocoder, latlng);
+            obtenerDepartamento(geocoder, latlng);
             setMarkers(map);
             function setMarkers(map) {
                 var distancia;
@@ -101,6 +103,12 @@ function cargarMapa() {
                     $('#cafs').append('<option value="' + caf.codigo + '">' + caf.nombre + '</option>');
                 }
                 $('#cafs').selectmenu('refresh');
+
+                for (var i = 0; i < cafs.length; i++) {
+                    var caf = cafs[i];
+                    $('#cafsac').append('<option value=441>PEREIRA ESPECIALIZADO MAC</option>');
+                }
+                $('#cafsac').selectmenu('refresh');
 
             }
 
@@ -136,11 +144,41 @@ function cargarMapa() {
                 }
               });
            }
+
+            function obtenerDepartamento(geocoder,latlng) {
+              geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    if (results) {
+                        var result = results[0];
+                        var departamento = "";
+                        for(var i=0, len=result.address_components.length; i<len; i++) {
+                                var ac = result.address_components[i];
+                                if(ac.types.indexOf('administrative_area_level_1') >= 0) departamento = ac.long_name;
+                        }
+                        if(departamento != '') {
+                            localStorage.setItem('departamento',departamento);
+                        }
+                    } else {
+                      window.alert('No se encontró el departamento');
+                    }
+                } else {
+                  window.alert('Se generó un error: ' + status);
+                }
+              });
+                $('#departamentoMapa').append($('<option>', {
+                    value: -1,
+                    text: localStorage.getItem('departamento').toUpperCase()
+                }, true));
+                $('#departamentoMapa').selectmenu('refresh');
+              
+
+           }            
             //google.maps.event.addListener(marker, 'click', function() {infowindow.open(map,marker);});
             //google.maps.event.addListener(caf, "click", function (e) { infowindowCaf.open(map, this); });
 
         }// Fin muestra mapa
         validarGps();
     });
+
 
 }
