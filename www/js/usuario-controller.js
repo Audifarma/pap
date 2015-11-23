@@ -20,7 +20,7 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //            + usuario.documentoIdentidad
 //            + '</label>';
 
-
+    var labels = null;
     $.mobile.loading("show");
     console.log(pap.Settings.autorizacionUrl);
     $.ajax({
