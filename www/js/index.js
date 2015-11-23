@@ -1,4 +1,4 @@
-var pap = pap || {};
+var pap = pap || {}, papUsuario = papUsuario || {};
 
 // Begin boilerplate code generated with Cordova project.
 
@@ -38,6 +38,7 @@ $(document).on("mobileinit", function (event, ui) {
 //app.signUpController = new pap.SignUpController();
 app.signInController = new pap.SignInController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
+app.autorizacionController = new papUsuario.AutorizacionController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
@@ -63,6 +64,10 @@ $(document).delegate("page-bookings", "pagebeforecreate", function () {
 
 $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
     app.registroUsuarioController.init();
+});
+
+$(document).delegate("#confirmar", "pagebeforecreate", function () {
+    app.autorizacionController.init();
 });
 
 $(document).on("pagecontainerbeforechange", function (event, ui) {
