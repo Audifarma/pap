@@ -39,6 +39,7 @@ $(document).on("mobileinit", function (event, ui) {
 app.signInController = new pap.SignInController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
 app.autorizacionController = new pap.AutorizacionController();
+app.papController = new pap.PapController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
@@ -66,10 +67,20 @@ $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
 
 $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
+    var usuario = pap.Settings.usuario;
+    usuario.codTipoDocumento = 1;
+    usuario.documentoIdentidad = '42016338';
+    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
 });
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
+    app.papController.init();
     $("#usuario-registrado").text(pap.Session.getInstance().get().userProfileModel);
+    app.papController.$labelUsuarioRegistrado.text(pap.Session.getInstance().get().userProfileModel);
+    app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
+        app.papController.iniciarConfirmacion();
+    });
+
 });
 
 $(document).on("pagecontainerbeforechange", function (event, ui) {
