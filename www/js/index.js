@@ -69,7 +69,8 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
     var usuario = pap.Settings.usuario;
     usuario.codTipoDocumento = 1;
-    usuario.documentoIdentidad = '42016338';
+    usuario.documentoIdentidad = '1093215489';
+    usuario.clave = 'kakaroto';
     app.autorizacionController.cargarAutorizacionesUsuario(usuario);
 });
 
