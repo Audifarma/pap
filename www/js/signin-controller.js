@@ -41,12 +41,13 @@ pap.SignInController.prototype.resetSignInForm = function () {
     this.$chkKeepSignedIn.prop("checked", false);
 
 };
-var usuario = {
-    codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
-};
+//var usuario = {
+//    codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null, clave: null, claveConfirmacion: null, sexo: null
+//};
+
 
 pap.SignInController.prototype.onSignInCommand = function () {
-
+    var usuario = pap.Settings.usuario;
     var me = this,
             emailAddress = me.$txtdocumento.val().trim(),
             password = me.$txtPassword.val().trim(),
