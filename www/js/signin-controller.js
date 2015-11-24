@@ -102,11 +102,18 @@ pap.SignInController.prototype.onSignInCommand = function () {
                 var expirationDate = new Date();
                 expirationDate.setTime(today.getTime() + pap.Settings.sessionTimeoutInMSec);
 
+                usuario.codTipoDocumento = resp.codTipoDocumento;
+                usuario.documentoIdentidad = resp.documentoIdentidad;
+                usuario.nombre = resp.nombre;
+                usuario.apellido = resp.apellido;
+                usuario.correo = resp.correo;
+
                 pap.Session.getInstance().set({
                     userProfileModel: resp.nombre + ' ' + resp.apellido,
                     sessionId: resp.correo,
                     expirationDate: expirationDate,
-                    keepSignedIn: me.$chkKeepSignedIn.is(":checked")
+                    keepSignedIn: me.$chkKeepSignedIn.is(":checked"),
+                    usuario: usuario
                 });
                 // Go to main menu.
                 $.mobile.navigate(me.papPageId);
