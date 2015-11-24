@@ -20,9 +20,9 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //            + usuario.documentoIdentidad
 //            + '</label>';
 
-    var labels = null;
+    var labels = '';
     $.mobile.loading("show");
-    console.log(pap.Settings.autorizacionUrl);
+    
     $.ajax({
         type: 'POST',
         url: pap.Settings.autorizacionUrl,
@@ -50,7 +50,12 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 
         }, error: function (e) {
             $.mobile.loading("hide");
-            console.log(message(e));
+            var mensaje = message(e);
+            if (mensaje == null) {
+                mensajeSoporte();
+            } else {
+                alert(mensaje);
+            }
         }
     });
 
