@@ -67,10 +67,7 @@ $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
 
 $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
-    var usuario = pap.Settings.usuario;
-    usuario.codTipoDocumento = 1;
-    usuario.documentoIdentidad = '1093215489';
-    usuario.clave = 'kakaroto';
+    var usuario = pap.Session.getInstance().get().usuario;
     app.autorizacionController.cargarAutorizacionesUsuario(usuario);
 });
 
