@@ -70,7 +70,7 @@ function cargarMapa() {
             
             //obtenerDepartamento(geocoder, latlng);
             obtenerCiudad(geocoder, latlng);
-            $('#ciudad').html(localStorage.getItem('departamento').toUpperCase());
+            $('#ciudad').html(localStorage.getItem('ciudad').toUpperCase());
             //cargarMunicipiosMapa(localStorage.getItem('departamento').toUpperCase());
             //obtenerCiudad(geocoder, latlng);
 
