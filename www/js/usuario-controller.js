@@ -52,9 +52,9 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
             $.mobile.loading("hide");
             var mensaje = message(e);
             if (mensaje == null) {
-                mensajeSoporte();
+//                mensajeSoporte();
             } else {
-                alert(mensaje);
+//                alert(mensaje);
             }
         }
     });
