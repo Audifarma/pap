@@ -83,6 +83,27 @@ function cargarDepartamentosMapa() {
     }
 }
 
+function cargarMunicipiosMapa(codDepartamento) {
+    $('#municipioMapa').find('option').remove();
+    $.ajax({
+        url: servicio + 'generic/get/municipios/' + codDepartamento,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var object = JSON.parse(resp[n]);
+                $('#municipioMapa').append($('<option>', {
+                    value: object.codigo,
+                    text: object.nombre
+                }));
+            }
+        }
+    });
+    $('#municipioMapa').selectmenu('refresh');
+}
+
 function cargarMunicipios(codDepartamento) {
     $('#municipioUsuario').find('option').remove();
     $('#municipioUsuario').append($('<option>', {
@@ -218,6 +239,27 @@ function cargarCafsCiudad(ciudad) {
     return cafsResp;
 }
 
+function cargarCafsDepartamento(departamento) {
+    var cafsResp =[];
+    $.ajax({
+        url: servicio + 'generic/get/CafsDepartamento/' + departamento,
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: false,
+        success: function (resp) {
+            var cafs =[];
+            for (var i = 0; i < resp.length; i++) {
+                var object = JSON.parse(resp[i]);
+                cafs.push({codigo:object.codigo,nombre:object.nombre,latitud:object.latitud,longitud:object.longitud,distancia:0});
+            }
+            cafsResp=cafs;
+            
+        }
+    });
+    return cafsResp;
+}
+
 function getAcuerdo() {
     acuerdo = "Entre las partes de conviene que: \n\
 \n\
@@ -268,3 +310,19 @@ function iniciarSesion() {
         }
     });
 };
+
+function quitarAcentos(cadena)
+{
+	cadena=cadena.replace('Á','A');
+	cadena=cadena.replace('É','E');
+	cadena=cadena.replace('Í','I');
+	cadena=cadena.replace('Ó','O');
+	cadena=cadena.replace('Ú','U');
+	cadena=cadena.replace('Ñ','N');
+	cadena=cadena.replace('Ä','A');
+	cadena=cadena.replace('Ë','E');
+	cadena=cadena.replace('Ï','I');
+	cadena=cadena.replace('Ö','O');
+	cadena=cadena.replace('Ü','U');	
+	return cadena;
+}

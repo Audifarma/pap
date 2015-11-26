@@ -68,23 +68,27 @@ function cargarMapa() {
                 title: "Mi posición",
                 animation: google.maps.Animation.DROP});
             
-            cargarDepartamentosMapa();
+            //obtenerDepartamento(geocoder, latlng);
             obtenerCiudad(geocoder, latlng);
-            obtenerDepartamento(geocoder, latlng);
+            $('#ciudad').html(localStorage.getItem('departamento').toUpperCase());
+            //cargarMunicipiosMapa(localStorage.getItem('departamento').toUpperCase());
+            //obtenerCiudad(geocoder, latlng);
+
+            //cargarDepartamentos();
             setMarkers(map);
             function setMarkers(map) {
                 var distancia;
                 var cafImgen = 'images/audifarma.png';
-                var cafs = cargarCafsCiudad(localStorage.getItem('ciudad'));
+                var cafs = cargarCafsCiudad(quitarAcentos(localStorage.getItem('ciudad').toUpperCase().replace(' ','')));
                 for (var i = 0; i < cafs.length; i++) {
                     var caf = cafs[i];
                     var marker = new google.maps.Marker({
-                        position: {lat: caf.latitud, lng: caf.longitud},
+                        position: {lat: parseFloat(caf.latitud), lng: parseFloat(caf.longitud)},
                         map: map,
                         icon: cafImgen,
                         title: caf.nombre,
                         zIndex: i+1,
-                        label: caf.codigo.toString()
+                        label: caf.nombre
                     });
                     distancia = google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf.latitud, caf.longitud));
                     cafs[i].distancia = distancia;
@@ -133,7 +137,6 @@ function cargarMapa() {
                                 if(ac.types.indexOf('locality') >= 0) city = ac.long_name;
                         }
                         if(city != '') {
-                                $('#ciudad').html(city);
                                 localStorage.setItem('ciudad',city);
                         }
                     } else {
@@ -165,11 +168,10 @@ function cargarMapa() {
                   window.alert('Se generó un error: ' + status);
                 }
               });
-                $('#departamentoMapa').append($('<option>', {
-                    value: -1,
-                    text: localStorage.getItem('departamento').toUpperCase()
-                }, true));
+                var cod_departamento=$('#departamentoMapa option:contains('+quitarAcentos(localStorage.getItem('departamento').toUpperCase().replace(' ',''))+')').val();
+                $('#departamentoMapa').val(cod_departamento).attr('selected', 'selected');
                 $('#departamentoMapa').selectmenu('refresh');
+                cargarMunicipiosMapa(cod_departamento);
               
 
            }            
