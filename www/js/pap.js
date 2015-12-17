@@ -175,7 +175,7 @@ function registrarUsuario() {
         data: data,
         success: function (resp) {
             //función cargar cupones usuario.
-            alert('Usuario registrado');
+            alert('Creación de Usuario','Usuario creado correctamente. ');
         },
         error: function (e) {
             var mensaje = message(e);
@@ -218,8 +218,8 @@ function listarAutorizacionesUsuario(resp) {
     $('#autorizaciones').selectmenu('refresh');
 }
 
-function cargarCafsCiudad(ciudad) {
-    var cafsResp =[];
+function cargarCafsCiudad(ciudad,latlng,map) {
+    //var cafsResp =[];
     $.ajax({
         url: servicio + 'generic/get/CafsCiudad/' + ciudad,
         type: 'GET',
@@ -232,11 +232,59 @@ function cargarCafsCiudad(ciudad) {
                 var object = JSON.parse(resp[i]);
                 cafs.push({codigo:object.codigo,nombre:object.nombre,latitud:object.latitud,longitud:object.longitud,distancia:0});
             }
-            cafsResp=cafs;
-            
+            //cafsResp=cafs;
+            listarCafs(cafs,latlng,map);
         }
     });
-    return cafsResp;
+    //listarCafs(cafsResp);
+    //return cafsResp;
+}
+function ventana_detalle(marker, distancia) {
+    var infowindow = new google.maps.InfoWindow({
+        content: '<div style="color: black;">' + marker.title + '<br> La Distancia al caf es: ' + distancia + ' metros</div>'
+    });
+
+    marker.addListener('click', function () {
+        infowindow.open(marker.get('map'), marker);
+    });
+}
+function listarCafs(cafs,latlng,map)
+{
+    var distancia;
+    var cafImgen = 'images/audifarma.png';
+    for (var i = 0; i < cafs.length; i++) {
+        var caf = cafs[i];
+        var marker = new google.maps.Marker({
+            position: {lat: parseFloat(caf.latitud), lng: parseFloat(caf.longitud)},
+            map: map,
+            icon: cafImgen,
+            title: caf.nombre,
+            zIndex: i+1,
+            label: caf.nombre
+        });
+        distancia = google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf.latitud, caf.longitud));
+        cafs[i].distancia = distancia;
+        ventana_detalle(marker, distancia.toFixed(0).toString());
+    }
+
+    cafs.sort(function (a, b) {
+        var a1 = a.distancia, b1 = b.distancia;
+        if (a1 == b1)
+            return 0;
+        return a1 < b1 ? 1 : -1;
+    });
+
+    for (var i = 0; i < cafs.length; i++) {
+        var caf = cafs[i];
+        $('#cafs').append('<option value="' + caf.codigo + '">' + caf.nombre + '</option>');
+    }
+    $('#cafs').selectmenu('refresh');
+
+    for (var i = 0; i < cafs.length; i++) {
+        var caf = cafs[i];
+        $('#cafsac').append('<option value=441>PEREIRA ESPECIALIZADO MAC</option>');
+    }
+    $('#cafsac').selectmenu('refresh');                
 }
 
 function cargarCafsDepartamento(departamento) {

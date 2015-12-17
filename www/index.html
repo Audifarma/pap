@@ -12,7 +12,6 @@
         <script src="JQ/jquery.min.js"></script>
         <script src="JQ/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/markerwithlabel.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
         <script src="./js/util.js"></script>
         <script src="./js/pap.js"></script>
         <script src="./js/app.js"></script>
@@ -137,7 +136,7 @@
                     <div class="ui-body ui-body-a ui-corner-all" style="border:none">
                         <form style="margin:0px">
                             <fieldset data-role="controlgroup">
-                                <input type="checkbox" name="autorizacion-1" id="autorizacion-1" checked="checked">
+                                <input type="checkbox" name="autorizacion-1" id="autorizacion-1" >
                                 <label for="autorizacion-1">Autorización 6410</label>
                                 <ul>
                                     <li>LOSARTAN POTASICO TABLETA O TABLETA RECUBIERTA  50 MG</li>
@@ -193,7 +192,7 @@
                 <label for="txt-password">Contraseña:</label>
                 <input type="password" name="txt-password" id="txt-password" value="">
                 <fieldset data-role="controlgroup">                
-                    <label><input type="checkbox" name="chk-keep-signed-in" id="chk-keep-signed-in"> Recordarme</label>
+                    <label><input type="checkbox" name="chk-keep-signed-in" id="chk-keep-signed-in" checked="checked"> Recordarme</label>
                 </fieldset>
                 <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" 
                    class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Ingresar</a>
@@ -257,7 +256,7 @@
                           readonly style="resize: none;">
                 </textarea>
 
-                <input type="checkbox" id="acuerdoUsuario" value="AceptaAcuerdo"
+                <input type="checkbox" id="acuerdoUsuario" value="AceptaAcuerdo" checked="checked" 
                        onchange="document.getElementById('bnRegistrarUsuario').focus()"/>
                 <label for="acuerdoUsuario">He leído y acepto.</label>
 
@@ -266,5 +265,6 @@
                 </button>
             </div>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&callback=initMap" async defer></script>
     </body>
 </html>
