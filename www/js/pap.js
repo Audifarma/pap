@@ -34,6 +34,14 @@ function cargarClientes() {
                     }));
                 }
 
+            },
+            error: function (e) {
+                var mensaje = message(e);
+                if (mensaje == null) {
+                    console.log("error al cargar clientes.")
+                } else {
+                    console.log(mensaje);
+                }
             }
         });
     }
@@ -139,10 +147,10 @@ function registrarUsuario() {
     usuario.clave = document.getElementById("claveUsuario").value;
     usuario.claveConfirmacion = document.getElementById("claveConfirmacionUsuario").value;
     usuario.fechaNacimiento = document.getElementById("fechaNacimientoUsuario").value;
-    if ($('#radio1:checked').val() !== 'undefined') {
+    if ($('#radio1:checked').val() != null && $('#radio1:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio1:checked').val();
     }
-    if ($('#radio2:checked').val() !== 'undefined') {
+    if ($('#radio2:checked').val() != null && $('#radio2:checked').val() !== 'undefined') {
         usuario.sexo = $('#radio2:checked').val();
     }
     usuario.direccion = $("#direccionUsuario").val();
@@ -152,12 +160,12 @@ function registrarUsuario() {
     solicitudRegistro.codCliente = document.getElementById("epsUsuario").value;
     solicitudRegistro.codDpto = document.getElementById("departamentoUsuario").value;
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
-    
-    if(validarRegistroUsuario(usuario, solicitudRegistro)){
+
+    if (validarRegistroUsuario(usuario, solicitudRegistro)) {
         alert('Por favor ingresa los datos requeridos.')
         return;
     }
-    
+
     if (!$('#acuerdoUsuario').is(":checked")) {
         alert('Acepta los terminos y condiciones');
         return;
@@ -175,7 +183,8 @@ function registrarUsuario() {
         data: data,
         success: function (resp) {
             //función cargar cupones usuario.
-            alert('Creación de Usuario','Usuario creado correctamente. ');
+            alert('Creación de Usuario', 'Usuario creado correctamente. ');
+            $.mobile.navigate("#page-signin");
         },
         error: function (e) {
             var mensaje = message(e);
@@ -218,7 +227,7 @@ function listarAutorizacionesUsuario(resp) {
     $('#autorizaciones').selectmenu('refresh');
 }
 
-function cargarCafsCiudad(ciudad,latlng,map) {
+function cargarCafsCiudad(ciudad, latlng, map) {
     //var cafsResp =[];
     $.ajax({
         url: servicio + 'generic/get/CafsCiudad/' + ciudad,
@@ -227,13 +236,13 @@ function cargarCafsCiudad(ciudad,latlng,map) {
         contentType: 'application/json',
         async: false,
         success: function (resp) {
-            var cafs =[];
+            var cafs = [];
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                cafs.push({codigo:object.codigo,nombre:object.nombre,latitud:object.latitud,longitud:object.longitud,distancia:0});
+                cafs.push({codigo: object.codigo, nombre: object.nombre, latitud: object.latitud, longitud: object.longitud, distancia: 0});
             }
             //cafsResp=cafs;
-            listarCafs(cafs,latlng,map);
+            listarCafs(cafs, latlng, map);
         }
     });
     //listarCafs(cafsResp);
@@ -248,7 +257,7 @@ function ventana_detalle(marker, distancia) {
         infowindow.open(marker.get('map'), marker);
     });
 }
-function listarCafs(cafs,latlng,map)
+function listarCafs(cafs, latlng, map)
 {
     var distancia;
     var cafImgen = 'images/audifarma.png';
@@ -259,7 +268,7 @@ function listarCafs(cafs,latlng,map)
             map: map,
             icon: cafImgen,
             title: caf.nombre,
-            zIndex: i+1,
+            zIndex: i + 1,
             label: caf.nombre
         });
         distancia = google.maps.geometry.spherical.computeDistanceBetween(latlng, new google.maps.LatLng(caf.latitud, caf.longitud));
@@ -284,11 +293,11 @@ function listarCafs(cafs,latlng,map)
         var caf = cafs[i];
         $('#cafsac').append('<option value=441>PEREIRA ESPECIALIZADO MAC</option>');
     }
-    $('#cafsac').selectmenu('refresh');                
+    $('#cafsac').selectmenu('refresh');
 }
 
 function cargarCafsDepartamento(departamento) {
-    var cafsResp =[];
+    var cafsResp = [];
     $.ajax({
         url: servicio + 'generic/get/CafsDepartamento/' + departamento,
         type: 'GET',
@@ -296,13 +305,13 @@ function cargarCafsDepartamento(departamento) {
         contentType: 'application/json',
         async: false,
         success: function (resp) {
-            var cafs =[];
+            var cafs = [];
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                cafs.push({codigo:object.codigo,nombre:object.nombre,latitud:object.latitud,longitud:object.longitud,distancia:0});
+                cafs.push({codigo: object.codigo, nombre: object.nombre, latitud: object.latitud, longitud: object.longitud, distancia: 0});
             }
-            cafsResp=cafs;
-            
+            cafsResp = cafs;
+
         }
     });
     return cafsResp;
@@ -333,7 +342,7 @@ function getAcuerdo() {
 \n\n\
 7. Que me comprometo a Permitir a Audifarma el uso de la información consignada al momento de su registro para efectos de contacto como correo electrónico y teléfonos de contacto.";
     return acuerdo;
-};
+}
 
 function iniciarSesion() {
     usuario.documentoIdentidad = document.getElementById("documentoUsuario").value;
@@ -357,20 +366,20 @@ function iniciarSesion() {
             }
         }
     });
-};
+}
 
 function quitarAcentos(cadena)
 {
-	cadena=cadena.replace('Á','A');
-	cadena=cadena.replace('É','E');
-	cadena=cadena.replace('Í','I');
-	cadena=cadena.replace('Ó','O');
-	cadena=cadena.replace('Ú','U');
-	cadena=cadena.replace('Ñ','N');
-	cadena=cadena.replace('Ä','A');
-	cadena=cadena.replace('Ë','E');
-	cadena=cadena.replace('Ï','I');
-	cadena=cadena.replace('Ö','O');
-	cadena=cadena.replace('Ü','U');	
-	return cadena;
+    cadena = cadena.replace('Á', 'A');
+    cadena = cadena.replace('É', 'E');
+    cadena = cadena.replace('Í', 'I');
+    cadena = cadena.replace('Ó', 'O');
+    cadena = cadena.replace('Ú', 'U');
+    cadena = cadena.replace('Ñ', 'N');
+    cadena = cadena.replace('Ä', 'A');
+    cadena = cadena.replace('Ë', 'E');
+    cadena = cadena.replace('Ï', 'I');
+    cadena = cadena.replace('Ö', 'O');
+    cadena = cadena.replace('Ü', 'U');
+    return cadena;
 }
