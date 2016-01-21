@@ -8,6 +8,7 @@ pap.SignInController = function () {
     this.$ctnErr = null;
     this.$txtdocumento = null;
     this.$txtPassword = null;
+    this.$txtRegId = null;
     this.$chkKeepSignedIn = null;
 };
 
@@ -19,6 +20,7 @@ pap.SignInController.prototype.init = function () {
     this.$ctnErr = $("#ctn-err", this.$signInPage);
     this.$txtdocumento = $("#txt-documento", this.$signInPage);
     this.$txtPassword = $("#txt-password", this.$signInPage);
+    this.$txtRegId = $("#txt-regId", this.$signInPage);
     this.$chkKeepSignedIn = $("#chk-keep-signed-in", this.$signInPage);
 };
 
@@ -38,6 +40,7 @@ pap.SignInController.prototype.resetSignInForm = function () {
     this.$txtPassword.removeClass(invalidInputStyle);
     this.$txtdocumento.val("");
     this.$txtPassword.val("");
+    this.$txtRegId.val("");
     this.$chkKeepSignedIn.prop("checked", false);
 
 };
@@ -51,6 +54,7 @@ pap.SignInController.prototype.onSignInCommand = function () {
     var me = this,
             emailAddress = me.$txtdocumento.val().trim(),
             password = me.$txtPassword.val().trim(),
+            regId = me.$txtRegId.val().trim(),
             invalidInput = false,
             invisibleStyle = "bi-invisible",
             invalidInputStyle = "bi-invalid-input";
@@ -85,6 +89,7 @@ pap.SignInController.prototype.onSignInCommand = function () {
 //    }
     usuario.documentoIdentidad = emailAddress;
     usuario.clave = password;
+    usuario.regId = regId;
     $.mobile.loading("show");
 
     $.ajax({

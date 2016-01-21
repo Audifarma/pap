@@ -82,7 +82,7 @@ function cargarMapa() {
                     if (results) {
                         //alert('1 '+results[1].formatted_address);
 
-                        var result = results[0];
+                        var result = results[1];
                         var city = "";
                         for(var i=0, len=result.address_components.length; i<len; i++) {
                                 var ac = result.address_components[i];
