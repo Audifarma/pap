@@ -1,15 +1,12 @@
 var pap = pap || {};
-
 pap.AutorizacionController = function () {
     this.$confirmarPage = null;
     this.$divAutorizacionesUsuario = null;
 };
-
 pap.AutorizacionController.prototype.init = function () {
     this.$confirmarPage = $("#confirmar");
     this.$divAutorizacionesUsuario = $("#div-autorizaciones-usuario", this.$confirmarPage);
 };
-
 pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
     var fset = '<fieldset data-role="controlgroup" id="members-ctrlgroup"><legend>Autorizaciones Usuario</legend>';
 //    var labels = '<input type="checkbox" id="c'
@@ -22,7 +19,8 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 
     var labels = '';
     $.mobile.loading("show");
-    
+    $("#div-autorizaciones-usuario").html('<p>*** Cargando Autorizaciones ***</p>');
+    $("#div-autorizaciones-usuario").trigger("create");
     $.ajax({
         type: 'POST',
         url: pap.Settings.autorizacionUrl,
@@ -32,33 +30,37 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
         success: function (resp) {
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                labels += '<input type="checkbox" id="s'
+                labels += '<input type="checkbox" value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
                         + i
                         + '"><label for="s'
                         + i
-                        + '">'
-                        + object.medicamentoComercial.descripcion
+                        + '">Autorización-'
+                        + object.nap
                         + '</label>';
+                var labelMx = '';
+                for (var ix = 0; ix < object.medicamentoComercialList.length; ix++) {
+                    labelMx += '<ul><li>';
+                    var mx = object.medicamentoComercialList[ix];
+                    labelMx += mx.descripcion;
+                    labelMx += '</li></ul>';
+                }
+                labels += labelMx;
             }
-
 //            this.$divAutorizacionesUsuario.html(fset + labels + '</fieldset>');
 //            this.$divAutorizacionesUsuario.trigger("create");
             $("#div-autorizaciones-usuario").html(fset + labels + '</fieldset>');
             $("#div-autorizaciones-usuario").trigger("create");
-
             $.mobile.loading("hide");
-
-        }, error: function (e) {
+        }
+        , error: function (e) {
             $.mobile.loading("hide");
             var mensaje = message(e);
             if (mensaje == null) {
 //                mensajeSoporte();
             } else {
-//                alert(mensaje);
+                $("#div-autorizaciones-usuario").html('<p>' + mensaje + '</p>');
+                $("#div-autorizaciones-usuario").trigger("create");
             }
         }
     });
-
-
-
 };
