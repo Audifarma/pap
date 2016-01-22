@@ -2,11 +2,65 @@ var pap = pap || {};
 pap.AutorizacionController = function () {
     this.$confirmarPage = null;
     this.$divAutorizacionesUsuario = null;
+    this.$btnConfirmar = null;
+    this.$membersCtrlGroup = null;
 };
 pap.AutorizacionController.prototype.init = function () {
     this.$confirmarPage = $("#confirmar");
     this.$divAutorizacionesUsuario = $("#div-autorizaciones-usuario", this.$confirmarPage);
+    this.$btnConfirmar = $("#btn-confirmar", this.$confirmarPage);
+    this.$membersCtrlGroup = $("#members-ctrlgroup", this.$divAutorizacionesUsuario);
 };
+
+pap.AutorizacionController.prototype.onConfirmar = function () {
+//    this.$membersCtrlGroup.find('INPUT').each(function () {
+//        var value = $(this).filter(':checked').val();
+//        if (value != null) {
+//            console.log(value);
+//            alert('check => ' + value);
+//        }
+//    });
+    var alistamientoList = [];
+    var i = 0;
+    $('#members-ctrlgroup').find('INPUT').each(function () {
+        var value = $(this).filter(':checked').val();
+        alistamiento = new Object();
+        alistamientoPK = new Object();
+        if (value != null) {
+            console.log(value);
+            alistamiento.nap = value.split('-')[0];
+            alistamientoPK.numeroAlistamiento = value.split('-')[1];
+            alistamiento.alistamientoPK = alistamientoPK;
+            alistamientoList[i] = alistamiento;
+            i++;
+        }
+    });
+
+    var data = JSON.stringify({alistamiento: alistamientoList});
+
+    $.ajax({
+        url: servicio + 'pap/post/autorizacionesUsuario',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: data,
+        success: function (resp) {
+            //función cargar cupones usuario.
+            alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
+        },
+        error: function (e) {
+            var mensaje = message(e);
+            if (mensaje == null) {
+                mensajeSoporte();
+            } else {
+                alert(mensaje);
+            }
+        }
+    });
+
+
+};
+
 pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
     var fset = '<fieldset data-role="controlgroup" id="members-ctrlgroup"><legend>Autorizaciones Usuario</legend>';
 //    var labels = '<input type="checkbox" id="c'
