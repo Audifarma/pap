@@ -8,6 +8,15 @@ var usuario = {
 var solicitudRegistro = {
     codSolicitudRegistro: 0, codCliente: 0, codDpto: 0, codCiudad: 0, fechaRegistro: null, horaRegistro: null
 };
+
+var alistamientoPK = {
+    codEmpresa: 0, codCaf: null, numeroAlistamiento: 0
+};
+
+var alistamiento = {
+    alistamientoPK: alistamientoPK, nap: null
+};
+
 //var servicio = "http://10.1.1.185:8095/paprs/webresources/";
 //var servicio = "http://localhost:9090/webresources/";
 //var servicio = "http://localhost:8080/webresources/";
