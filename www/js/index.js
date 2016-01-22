@@ -114,6 +114,9 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
     var usuario = pap.Session.getInstance().get().usuario;
     app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+    app.autorizacionController.$btnConfirmar.off("tap").on("tap", function () {
+        app.autorizacionController.onConfirmar();
+    });
 });
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
