@@ -145,7 +145,8 @@ pap.SignInController.prototype.onSignInCommand = function () {
             $.mobile.loading("hide");
             console.log(e.message);
             // TODO: Use a friendlier error message below.
-            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+//            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+            me.$ctnErr.html("<p>" + e.message + "</p>");
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
         }
     });
