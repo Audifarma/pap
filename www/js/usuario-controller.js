@@ -39,13 +39,20 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
     var data = JSON.stringify({alistamiento: alistamientoList});
 
     $.ajax({
-        url: servicio + 'pap/post/autorizacionesUsuario',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
+        url: pap.Settings.confirmarAutorizacionUrl,
+        type: pap.Settings.TYPE_POST,
+        dataType: pap.Settings.DATA_TYPE_JSON,
+        contentType: pap.Settings.APPLICATION_JSON,
         data: data,
         success: function (resp) {
-            //función cargar cupones usuario.
+            $('#members-ctrlgroup').find('INPUT').each(function () {
+                var value = $(this).filter(':checked').val();
+                if (value != null) {
+                    $(this).attr("checked", false);
+                    $(this).attr("disabled", true);
+                }
+            });
+
             alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
         },
         error: function (e) {
