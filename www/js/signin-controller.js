@@ -146,7 +146,12 @@ pap.SignInController.prototype.onSignInCommand = function () {
             console.log(e.message);
             // TODO: Use a friendlier error message below.
 //            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
-            me.$ctnErr.html("<p>" + e.message + "</p>");
+            var mensaje = message(e);
+            if (mensaje == null) {
+                me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+            } else {
+                me.$ctnErr.html("<p>" + mensaje + "</p>");
+            }
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
         }
     });
