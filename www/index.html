@@ -31,24 +31,24 @@
         <script src="js/mapa.js"></script>
 
         <script>
-            function iniciarConfirmacion()
-            {
-                cargarMapa();
-                cargarAutorizacionesUsuario();
-            }
+//            function iniciarConfirmacion()
+//            {
+//                cargarMapa();
+//                cargarAutorizacionesUsuario();
+//            }
 
-            function recoge()
-            {
-                document.getElementById('members-ctrlgroup').form;
-
-                $('#members-ctrlgroup').find('INPUT').each(function () {
-                    var value = $(this).filter(':checked').val();
-                    if (value != null) {
-                        console.log(value);
-                    }
-                });
-
-            }
+//            function recoge()
+//            {
+//                document.getElementById('members-ctrlgroup').form;
+//
+//                $('#members-ctrlgroup').find('INPUT').each(function () {
+//                    var value = $(this).filter(':checked').val();
+//                    if (value != null) {
+//                        console.log(value);
+//                    }
+//                });
+//
+//            }
         </script>
         <style>
             #map-canvas{
@@ -92,7 +92,7 @@
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <label id="label-usuario-registrado" style="text-align: right;font-style: italic; margin-right: 10px;"></label>
                 <div class="ui-grid-a">
-                    <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="iniciarConfirmacion(), location.href = '#confirmar'">
+                    <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#confirmar'">
                         <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">
                             <img src="images/icono_confirmar.png" alt="PAP" style="width: 60%"><br>Confirmar Orden
                         </div>
