@@ -71,14 +71,6 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
 
 pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
     var fset = '<fieldset data-role="controlgroup" id="members-ctrlgroup"><legend>Autorizaciones Usuario</legend>';
-//    var labels = '<input type="checkbox" id="c'
-//            + usuario.codTipoDocumento
-//            + '"><label for="c'
-//            + usuario.codTipoDocumento
-//            + '">'
-//            + usuario.documentoIdentidad
-//            + '</label>';
-
     var labels = '';
     $.mobile.loading("show");
     $("#div-autorizaciones-usuario").html('<p>*** Cargando Autorizaciones ***</p>');
@@ -108,8 +100,6 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
                 }
                 labels += labelMx;
             }
-//            this.$divAutorizacionesUsuario.html(fset + labels + '</fieldset>');
-//            this.$divAutorizacionesUsuario.trigger("create");
             $("#div-autorizaciones-usuario").html(fset + labels + '</fieldset>');
             $("#div-autorizaciones-usuario").trigger("create");
             $.mobile.loading("hide");
