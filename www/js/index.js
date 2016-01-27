@@ -121,7 +121,6 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
 });
 
 $(document).delegate("#confirmar", "pageshow", function () {
-    alert('show');
     var usuario = pap.Session.getInstance().get().usuario;
     app.autorizacionController.cargarAutorizacionesUsuario(usuario);
     cargarMapa();
