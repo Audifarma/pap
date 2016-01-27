@@ -47,9 +47,8 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
         success: function (resp) {
             $('#members-ctrlgroup').find('INPUT').each(function () {
                 var value = $(this).filter(':checked').val();
-                if (value != null) {
-//                    $(this).attr("checked", false);
-                    $(this).removeAttr('checked');
+                if (value != null) {                    
+                    $(this).prop("checked", false).checkboxradio("refresh") ;
                     $(this).attr("disabled", true);
                 }
             });
