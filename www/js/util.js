@@ -17,6 +17,11 @@ function mensajeSoporte() {
     alert('Error no controlado, contactenos para asistirte o intenta de nuevo.');
 }
 
+function getMsjSoporte() {
+    return 'Ocurrio un problema no controlado. Por favor intentelo en unos minutos.';
+}
+
+
 function status() {
     return "<center><img src='./img/spinner.gif'/></center>";
 }
