@@ -23,44 +23,44 @@ var app = {
             "android": {
                 "senderID": "372883883978"
             },
-            "ios": {"alert": "true", "badge": "true", "sound": "true"}, 
-            "windows": {} 
+            "ios": {"alert": "true", "badge": "true", "sound": "true"},
+            "windows": {}
         });
-        
-        push.on('registration', function(data) {
+
+        push.on('registration', function (data) {
             console.log("registration event");
             document.getElementById("txt-regId").value = data.registrationId;
             console.log(JSON.stringify(data));
         });
 
-        push.on('notification', function(data) {
-        	console.log("notification event");
+        push.on('notification', function (data) {
+            console.log("notification event");
             console.log(JSON.stringify(data));
             //var cards = document.getElementById("cards");
             var card = '<div class="row">' +
-		  		  '<div class="col s12 m6">' +
-				  '  <div class="card darken-1">' +
-				  '    <div class="card-content black-text">' +
-				  '      <span class="card-title black-text">' + data.title + '</span>' +
-				  '      <p>' + data.message + '</p>' +
-				  '    </div>' +
-				  '  </div>' +
-				  ' </div>' +
-				  '</div>';
+                    '<div class="col s12 m6">' +
+                    '  <div class="card darken-1">' +
+                    '    <div class="card-content black-text">' +
+                    '      <span class="card-title black-text">' + data.title + '</span>' +
+                    '      <p>' + data.message + '</p>' +
+                    '    </div>' +
+                    '  </div>' +
+                    ' </div>' +
+                    '</div>';
             //cards.innerHTML += card;
-            
+
             push.finish(function () {
                 console.log('finish successfully called');
             });
         });
 
-        push.on('error', function(e) {
+        push.on('error', function (e) {
             console.log("push error");
         });
 
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -103,7 +103,7 @@ $(document).delegate("page-bookings", "pagebeforecreate", function () {
     });
 
     // Show  the list of bookings.
-    app.bookingsController.showBookings();
+//    app.bookingsController.showBookings();
 });
 
 $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
@@ -112,12 +112,21 @@ $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
 
 $(document).delegate("#confirmar", "pagebeforecreate", function () {
     app.autorizacionController.init();
-    var usuario = pap.Session.getInstance().get().usuario;
-    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+//    var usuario = pap.Session.getInstance().get().usuario;
+//    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+//    cargarMapa();
     app.autorizacionController.$btnConfirmar.off("tap").on("tap", function () {
         app.autorizacionController.onConfirmar();
     });
 });
+
+$(document).delegate("#confirmar", "pageshow", function () {
+    alert('show');
+    var usuario = pap.Session.getInstance().get().usuario;
+    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+    cargarMapa();
+});
+
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
     app.papController.init();
