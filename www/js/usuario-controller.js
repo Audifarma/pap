@@ -118,11 +118,11 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
             $.mobile.loading("hide");
             var mensaje = message(e);
             if (mensaje == null) {
-//                mensajeSoporte();
+                $("#div-autorizaciones-usuario").html('<p>' + getMsjSoporte() + '</p>');
             } else {
                 $("#div-autorizaciones-usuario").html('<p>' + mensaje + '</p>');
-                $("#div-autorizaciones-usuario").trigger("create");
             }
+            $("#div-autorizaciones-usuario").trigger("create");
         }
     });
 };
