@@ -5,10 +5,10 @@ function cargarMapa() {
             cordova.plugins.diagnostic.isLocationEnabled(
                     function (enabled) {
                         if (enabled) {
-                            setTimeout(validarGps, 6000)
+                            validarGps();
                         }
                         else {
-                            setTimeout(esperarGps, 6000)
+                            esperarGps();
                         }
                     }, function (error) {
                 console.error("Error: " + error);
@@ -40,7 +40,7 @@ function cargarMapa() {
                 //maximumAge- Guarda la posicion por 5 minutos 
                 //enableHighAccuracy: Se tratan de obtener los mejores resultados posible del GPS
                 //timeout: el tiempo maximo que se espera para obtener la posicion en este caso 5 segundos
-                var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 5000};
+                var options = {maximumAge: 500000, enableHighAccuracy: true, timeout: 10000};
                 navigator.geolocation.getCurrentPosition(exito, falla, options);
             }//FIN IF
             else {
