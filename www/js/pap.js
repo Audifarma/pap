@@ -282,7 +282,8 @@ function listarCafs(cafs, latlng, map)
             return 0;
         return a1 < b1 ? 1 : -1;
     });
-
+    $('#cafs option').remove();
+    $('#cafs').selectmenu('refresh');
     for (var i = 0; i < cafs.length; i++) {
         var caf = cafs[i];
         $('#cafs').append('<option value="' + caf.codigo + '">' + caf.nombre + '</option>');
