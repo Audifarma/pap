@@ -1,4 +1,4 @@
-﻿var pap = pap || {};
+var pap = pap || {};
 pap.ApiMessages = pap.ApiMessages || {};
 pap.ApiMessages.EMAIL_NOT_FOUND = 1;
 pap.ApiMessages.INVALID_PWD = 2;
