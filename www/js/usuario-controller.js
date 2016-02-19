@@ -36,34 +36,37 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
         }
     });
 
-    var data = JSON.stringify({alistamiento: alistamientoList});
+    if (alistamientoList.length > 0) {
+        var data = JSON.stringify({alistamiento: alistamientoList});
+        $.ajax({
+            url: pap.Settings.confirmarAutorizacionUrl,
+            type: pap.Settings.TYPE_POST,
+            dataType: pap.Settings.DATA_TYPE_JSON,
+            contentType: pap.Settings.APPLICATION_JSON,
+            data: data,
+            success: function (resp) {
+                $('#members-ctrlgroup').find('INPUT').each(function () {
+                    var value = $(this).filter(':checked').val();
+                    if (value != null) {
+                        $(this).prop("checked", false).checkboxradio("refresh");
+                        $(this).attr("disabled", true);
+                    }
+                });
 
-    $.ajax({
-        url: pap.Settings.confirmarAutorizacionUrl,
-        type: pap.Settings.TYPE_POST,
-        dataType: pap.Settings.DATA_TYPE_JSON,
-        contentType: pap.Settings.APPLICATION_JSON,
-        data: data,
-        success: function (resp) {
-            $('#members-ctrlgroup').find('INPUT').each(function () {
-                var value = $(this).filter(':checked').val();
-                if (value != null) {                    
-                    $(this).prop("checked", false).checkboxradio("refresh") ;
-                    $(this).attr("disabled", true);
+                alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
+            },
+            error: function (e) {
+                var mensaje = message(e);
+                if (mensaje == null) {
+                    mensajeSoporte();
+                } else {
+                    alert(mensaje);
                 }
-            });
-
-            alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
-        },
-        error: function (e) {
-            var mensaje = message(e);
-            if (mensaje == null) {
-                mensajeSoporte();
-            } else {
-                alert(mensaje);
             }
-        }
-    });
+        });
+    } else {
+        alert('Seleccione las autorizaciones a confirmar.', 'Indica Autorización');
+    }
 
 
 };
