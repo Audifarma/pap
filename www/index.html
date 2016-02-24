@@ -20,6 +20,7 @@
         <script src="JQ/fastclick.min.js"></script>
 
         <script src="js/signin-controller.js" type="text/javascript"></script>
+        <script src="js/signout-controller.js" type="text/javascript"></script>
         <script src="js/usuario-controller.js" type="text/javascript"></script>
         <script src="js/registro-usuario-controller.js" type="text/javascript"></script>
         <script src="js/pap-controller.js" type="text/javascript"></script>
@@ -91,6 +92,7 @@
             <div role="main" class="ui-content" style="padding:0%">
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
                 <label id="label-usuario-registrado" style="text-align: right;font-style: italic; margin-right: 10px;"></label>
+                <p class="bi-top-margin-1-5"><a id="div-cerrar-sesion">Cerrar Sesión</a></p>
                 <div class="ui-grid-a">
                     <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#confirmar'">
                         <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">
@@ -190,10 +192,10 @@
 
 
 
-<!--                    <button class="ui-btn ui-btn-b ui-corner-all" style="background-color: #660099;color: white;border: none"
-                            onclick="recoge()">
-                        Confirmar y Recoger
-                    </button>-->
+                    <!--                    <button class="ui-btn ui-btn-b ui-corner-all" style="background-color: #660099;color: white;border: none"
+                                                onclick="recoge()">
+                                            Confirmar y Recoger
+                                        </button>-->
 
                     <a data-rel="popup" data-transition="pop" data-position-to="window" id="btn-confirmar"
                        style="background-color: #660099;"
@@ -218,7 +220,7 @@
                 </fieldset>
                 <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" 
                    class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Ingresar</a>
-                <p class="bi-top-margin-1-5"><a href="#begin-password-reset-page">Olvidaste tu contraseña?</a></p>
+                <p class="bi-top-margin-1-5"><a href="#page-remember">Olvidaste tu contraseña?</a></p>
             </div>
         </div>
 
@@ -285,6 +287,18 @@
                 <button id="bnRegistrarUsuario" class="btn btn-block" onclick="registrarUsuario()">
                     Crear Usuario
                 </button>
+            </div>
+        </div>
+        <div data-role="page" id="page-remember">
+            <div role="main" class="ui-content">
+                <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
+                <img src="images/cabecera.png" alt="PAP" style="width: 100%">
+                <h3>Recordar Contraseña</h3>
+                <div id="ctn-err" class="bi-invisible"></div>
+                <label for="txt-documento">Documento:</label>
+                <input type="number" name="txt-documento" id="txt-documento" value="">                                
+                <a href="#dlg-invalid-credentials" data-rel="popup" data-transition="pop" data-position-to="window" id="btn-submit" 
+                   class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Enviar</a>                
             </div>
         </div>
     </body>

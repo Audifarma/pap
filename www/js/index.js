@@ -82,16 +82,23 @@ $(document).on("mobileinit", function (event, ui) {
 
 //app.signUpController = new pap.SignUpController();
 app.signInController = new pap.SignInController();
+//app.signOutController = new pap.SignOutController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
 app.autorizacionController = new pap.AutorizacionController();
 app.papController = new pap.PapController();
-app.signOutController = new pap.SignOutController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
     app.signInController.init();
     app.signInController.$btnSubmit.off("tap").on("tap", function () {
         app.signInController.onSignInCommand();
+    });
+});
+
+$(document).delegate("#page-remember", "pagebeforecreate", function () {
+    app.signInController.initRemember();
+    app.signInController.$btnSubmit.off("tap").on("tap", function () {
+        app.signInController.onRememberCommand();
     });
 });
 
@@ -109,6 +116,13 @@ $(document).delegate("page-bookings", "pagebeforecreate", function () {
 
 $(document).delegate("#divRegistrarUsuario", "pagebeforecreate", function () {
     app.registroUsuarioController.init();
+});
+
+$(document).delegate("#cerrarSesion", "pagebeforecreate", function () {
+    app.signOutController.init();
+    app.signOutController.$btnSubmit.off("tap").on("tap", function () {
+        app.signOutController.cerrarSession();
+    });
 });
 
 $(document).delegate("#confirmar", "pagebeforecreate", function () {
@@ -129,9 +143,12 @@ $(document).delegate("#confirmar", "pageshow", function () {
 
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
-    app.papController.init();
+    app.papController.init();    
     $("#usuario-registrado").text(pap.Session.getInstance().get().userProfileModel);
     app.papController.$labelUsuarioRegistrado.text(pap.Session.getInstance().get().userProfileModel);
+    app.papController.$linkCerrarSession.off("tap").on("tap", function () {
+        app.papController.cerrarSession();
+    });
     app.papController.$divIniciarConfirmacion.off("tap").on("tap", function () {
         app.papController.iniciarConfirmacion();
     });

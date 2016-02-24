@@ -2,24 +2,19 @@ var pap = pap || {};
 
 pap.SignOutController = function () {
 
-    this.$signInPage = null;
-    this.bookingsPageId = null;
+    this.$signInPage = null;    
     this.$btnSubmit = null;
-    this.$ctnErr = null;
-    this.$txtdocumento = null;
-    this.$txtPassword = null;
-    this.$txtRegId = null;
-    this.$chkKeepSignedIn = null;
+    this.$ctnErr = null;    
+    this.papPageId=null;
 };
 
 pap.SignOutController.prototype.init = function () {
-    this.$signInPage = $("#page-signin");
-    this.bookingsPageId = "#pap";
+    this.$signInPage = $("#page-signin");    
     this.papPageId = "#pap";
-    this.$btnSubmit = $("#btn-submit", this.$signInPage);
-    this.$ctnErr = $("#ctn-err", this.$signInPage);
-    this.$txtdocumento = $("#txt-documento", this.$signInPage);
-    this.$txtPassword = $("#txt-password", this.$signInPage);
-    this.$txtRegId = $("#txt-regId", this.$signInPage);
-    this.$chkKeepSignedIn = $("#chk-keep-signed-in", this.$signInPage);
+    this.$btnSubmit = $("#btn-submit", this.papPageId);    
+};
+
+pap.SignOutController.prototype.cerrarSession = function () {
+    pap.Session.deleteInstance();
+    $.mobile.navigate(this.$signInPage);
 };

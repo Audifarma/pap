@@ -12,19 +12,20 @@ pap.Session = (function () {
             set: function (sessionData) {
                 window.localStorage.setItem(sessionIdKey, JSON.stringify(sessionData));
             },
-
             get: function () {
 
                 var result = null;
 
                 try {
                     result = JSON.parse(window.localStorage.getItem(sessionIdKey));
-                } catch(e){}
+                } catch (e) {
+                }
 
                 return result;
             }
         };
-    };
+    }
+    ;
 
     return {
         getInstance: function () {
@@ -32,6 +33,10 @@ pap.Session = (function () {
                 instance = init();
             }
             return instance;
+        }
+        , deleteInstance: function () {
+            var sessionIdKey = "pap-session";
+            window.localStorage.removeItem(sessionIdKey);
         }
     };
 }());

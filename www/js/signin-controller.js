@@ -10,6 +10,7 @@ pap.SignInController = function () {
     this.$txtPassword = null;
     this.$txtRegId = null;
     this.$chkKeepSignedIn = null;
+    this.$remeberPage =null;
 };
 
 pap.SignInController.prototype.init = function () {
@@ -23,6 +24,17 @@ pap.SignInController.prototype.init = function () {
     this.$txtRegId = $("#txt-regId", this.$signInPage);
     this.$chkKeepSignedIn = $("#chk-keep-signed-in", this.$signInPage);
 };
+
+pap.SignInController.prototype.initRemember = function () {
+    this.$signInPage = $("#page-signin");
+    this.$remeberPage = $("#page-remember");
+    this.bookingsPageId = "#pap";
+    this.papPageId = "#pap";
+    this.$btnSubmit = $("#btn-submit", this.$remeberPage);
+    this.$ctnErr = $("#ctn-err", this.$remeberPage);
+    this.$txtdocumento = $("#txt-documento", this.$remeberPage);           
+};
+
 
 pap.SignInController.prototype.emailAddressIsValid = function (email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -149,6 +161,86 @@ pap.SignInController.prototype.onSignInCommand = function () {
             var mensaje = message(e);
             if (mensaje == null) {
                 me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+            } else {
+                me.$ctnErr.html("<p>" + mensaje + "</p>");
+            }
+            me.$ctnErr.addClass("bi-ctn-err").slideDown();
+        }
+    });
+};
+
+pap.SignInController.prototype.onRememberCommand = function () {
+    var usuario = pap.Settings.usuario;
+    var me = this,
+            emailAddress = me.$txtdocumento.val().trim(),
+            password = me.$txtPassword.val().trim(),
+            regId = me.$txtRegId.val().trim(),
+            invalidInput = false,
+            invisibleStyle = "bi-invisible",
+            invalidInputStyle = "bi-invalid-input";
+
+    // Reset styles.
+    me.$ctnErr.removeClass().addClass(invisibleStyle);
+    me.$txtdocumento.removeClass(invalidInputStyle);
+    me.$txtPassword.removeClass(invalidInputStyle);
+
+    // Flag each invalid field.
+    if (emailAddress.length === 0) {
+        me.$txtdocumento.addClass(invalidInputStyle);
+        invalidInput = true;
+    }
+
+    // Make sure that all the required fields have values.
+    if (invalidInput) {
+        me.$ctnErr.html("<p>Porfavor ingrese los datos requeridos.</p>");
+        me.$ctnErr.addClass("bi-ctn-err").slideDown();
+        return;
+    }
+
+    usuario.documentoIdentidad = emailAddress;
+    $.mobile.loading("show");
+
+    $.ajax({
+        type: 'POST',
+        url: pap.Settings.recordarUrl,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(usuario), //"email=" + emailAddress + "&password=" + password,
+        success: function (resp) {
+            $.mobile.loading("hide");
+
+            if (resp.success === true) {
+                // Create session.                 
+                me.$ctnErr.html("<p>Los datos de ingreso serán enviados al correo registrado.</p>");
+                // Go to main menu.
+                //$.mobile.navigate(me.$signInPage);
+                return;
+            } else {
+                if (resp.extras.msg) {
+                    switch (resp.extras.msg) {
+                        case pap.ApiMessages.DB_ERROR:
+                            // TODO: Use a friendlier error message below.
+                            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+                            me.$ctnErr.addClass("bi-ctn-err").slideDown();
+                            break;
+                        case pap.ApiMessages.INVALID_PWD:
+                        case pap.ApiMessages.EMAIL_NOT_FOUND:
+                            me.$ctnErr.html("<p>Usuario o contraseña incorrectos.  Por favor intentelo nuevamente.</p>");
+                            me.$ctnErr.addClass("bi-ctn-err").slideDown();
+                            me.$txtdocumento.addClass(invalidInputStyle);
+                            break;
+                    }
+                }
+            }
+        },
+        error: function (e) {
+            $.mobile.loading("hide");
+            console.log(e.message);
+            // TODO: Use a friendlier error message below.
+//            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
+            var mensaje = message(e);
+            if (mensaje == null) {
+                me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido enviar la información.  Por favor intentelo en unos minutos.</p>");
             } else {
                 me.$ctnErr.html("<p>" + mensaje + "</p>");
             }
