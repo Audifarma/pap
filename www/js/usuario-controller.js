@@ -77,6 +77,8 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
     $.mobile.loading("show");
     $("#div-autorizaciones-usuario").html('<p>*** Cargando Autorizaciones ***</p>');
     $("#div-autorizaciones-usuario").trigger("create");
+    $("#btn-confirmar").button();
+    $("#btn-confirmar").prop('disabled', true).button("refresh");;
     $.ajax({
         type: 'POST',
         url: pap.Settings.autorizacionUrl,
@@ -85,6 +87,7 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
         data: JSON.stringify(usuario),
         success: function (resp) {
             for (var i = 0; i < resp.length; i++) {
+                $("#btn-confirmar").prop('disabled', false).button("refresh");
                 var object = JSON.parse(resp[i]);
                 labels += '<input type="checkbox" value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
                         + i
