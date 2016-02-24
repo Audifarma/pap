@@ -85,6 +85,7 @@ app.signInController = new pap.SignInController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
 app.autorizacionController = new pap.AutorizacionController();
 app.papController = new pap.PapController();
+app.signOutController = new pap.SignOutController();
 //app.bookingsController = new pap.BookingsController();
 
 $(document).delegate("#page-signin", "pagebeforecreate", function () {
