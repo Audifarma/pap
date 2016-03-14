@@ -11,6 +11,15 @@ pap.AutorizacionController.prototype.init = function () {
     this.$btnConfirmar = $("#btn-confirmar", this.$confirmarPage);
     this.$membersCtrlGroup = $("#members-ctrlgroup", this.$divAutorizacionesUsuario);
 };
+pap.AlistamientoController = function () {
+    this.$mis_ordenesPage = null;
+    this.$divAlistamientosUsuario = null;
+};
+pap.AlistamientoController.prototype.init = function () {
+    this.$mis_ordenesPage = $("#mis_ordenes");
+    this.$divAlistamientosUsuario = $("#div-alistamientos-usuario", this.$mis_ordenesPage);
+
+};
 
 pap.AutorizacionController.prototype.onConfirmar = function () {
 //    this.$membersCtrlGroup.find('INPUT').each(function () {
@@ -118,6 +127,44 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
                 $("#div-autorizaciones-usuario").html('<p>' + mensaje + '</p>');
             }
             $("#div-autorizaciones-usuario").trigger("create");
+        }
+    });
+};
+
+pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usuario) {
+    var fset = '';
+    var labels = '';
+    $.mobile.loading("show");
+    $("#div-alistamientos-usuario").html('<p>*** Cargando Alistamientos ***</p>');
+    $("#div-alistamientos-usuario").trigger("create");
+    $.ajax({
+        type: 'POST',
+        url: pap.Settings.alistamientoUrl,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(usuario),
+        success: function (resp) {
+            labels += '<table data-role="table" id="movie-table" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" data-column-btn-text="Columas" data-column-popup-theme="a"> '
+                    + '<thead> <th data-priority="persist">Nap</th> <th data-priority="persist">Estado</th> </tr>   </thead> '
+                    + '<tbody> ';
+            for (var i = 0; i < resp.length; i++) {
+                var object = JSON.parse(resp[i]);
+                    labels +='<tr><td>'+object.nap+'</td> <td>'+object.estado+'</td></tr>' ;
+            }
+            labels += '</tbody> </table>';
+            $("#div-alistamientos-usuario").html(labels );
+            $("#div-alistamientos-usuario").trigger("create");
+            $.mobile.loading("hide");
+        }
+        , error: function (e) {
+            $.mobile.loading("hide");
+            var mensaje = message(e);
+            if (mensaje == null) {
+                $("#div-alistamientos-usuario").html('<p>' + getMsjSoporte() + '</p>');
+            } else {
+                $("#div-alistamientos-usuario").html('<p>' + mensaje + '</p>');
+            }
+            $("#div-alistamientos-usuario").trigger("create");
         }
     });
 };

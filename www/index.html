@@ -91,15 +91,24 @@
 
             <div role="main" class="ui-content" style="padding:0%">
                 <img src="images/cabecera.png" alt="PAP" style="width: 100%">
-                <label id="label-usuario-registrado" style="text-align: right;font-style: italic; margin-right: 10px;"></label>
-                <p class="bi-top-margin-1-5"><a id="div-cerrar-sesion">Cerrar Sesión</a></p>
+                <div style="text-align: right;font-style: italic; ">
+                    <a href="#popupMenu"  id="label-usuario-registrado" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-d ui-btn-icon-right ui-btn-a"></a>
+                </div>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                        <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                                <li ><a href="#" style="border:none">Perfil</a></li>
+                            <li><a id="div-cerrar-sesion" style="border:none">Cerrar Sessión</a></li>
+                        </ul>
+                </div>
+                
+
                 <div class="ui-grid-a">
                     <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#confirmar'">
                         <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;background-color: #660099;color:white;font-weight:none;padding-top: 20px">
                             <img src="images/icono_confirmar.png" alt="PAP" style="width: 60%"><br>Confirmar Orden
                         </div>
                     </div>
-                    <div class="ui-block-b">                                            
+                    <div id="div-iniciar-ordenes" class="ui-block-b" onclick="location.href = '#mis_ordenes'">                                            
                         <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;background-color: #FF9900;color:white;font-weight:none;padding-top: 20px">
                             <img src="images/icono_ordenes.png" alt="PAP" style="width: 60%"><br>Mis Órdenes
                         </div>
@@ -138,8 +147,8 @@
         </div>
 
         <div id="confirmar" data-role="page" data-url="map-page" >
-            <div data-role="header" data-position="fixed" >
-                <a href="#" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" data-rel="back">Back Icon</a>
+            <div data-role="header" data-position="fixed" style="background-color: #660099" >
+                <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>
                 <h1>Confirmar</h1>
             </div>
             <div role="main" class="ui-content">
@@ -202,6 +211,27 @@
                        class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Confirmar y Recoger</a>
 
                 </div>
+            </div>
+        </div>
+
+        <div id="mis_ordenes" data-role="page" data-url="map-page" >
+            <div data-role="header" data-position="fixed" style="background-color: #FF9900">
+                <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>                
+                <h1>Ordenes</h1>
+            </div>
+            <div role="main" class="ui-content">
+                    
+                    <div class="ui-body ui-body-a ui-corner-all" style="border:none">
+                        <form style="margin:0px">
+
+                            <div id="div-alistamientos-usuario"></div>
+                        </form>
+                    </div>
+                    <br>
+                    <a href="#pap" style="background-color: #FF9900;"
+                       class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5" >Volver</a>
+
+                
             </div>
         </div>
 

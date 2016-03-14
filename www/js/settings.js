@@ -35,6 +35,7 @@ pap.Settings.signInUrl = servicio + "generic/post/validarUsuario";
 pap.Settings.recordarUrl = servicio + "generic/post/recordarUsuario";
 pap.Settings.autorizacionUrl = servicio + "pap/get/autorizacionesUsuario";
 pap.Settings.confirmarAutorizacionUrl = servicio + 'pap/post/autorizacionesUsuario';
+pap.Settings.alistamientoUrl = servicio + "pap/get/alistamientosUsuario";
 pap.Settings.bookingsUrl = servicio + "generic/post/validarUsuario";
 pap.Settings.sessionIdKey = "pap-session";
 pap.Settings.sessionTimeoutInMSec = 86400000 * 30;   // 30 days.

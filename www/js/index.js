@@ -85,6 +85,7 @@ app.signInController = new pap.SignInController();
 //app.signOutController = new pap.SignOutController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
 app.autorizacionController = new pap.AutorizacionController();
+app.alistamientoController = new pap.AlistamientoController();
 app.papController = new pap.PapController();
 //app.bookingsController = new pap.BookingsController();
 
@@ -141,6 +142,14 @@ $(document).delegate("#confirmar", "pageshow", function () {
     cargarMapa();
 });
 
+$(document).delegate("#mis_ordenes", "pagebeforecreate", function () {
+    app.alistamientoController.init();
+});
+
+$(document).delegate("#mis_ordenes", "pageshow", function () {
+    var usuario = pap.Session.getInstance().get().usuario;
+    app.alistamientoController.cargarAlistamientosUsuario(usuario);
+});
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
     app.papController.init();    
