@@ -144,12 +144,14 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
         contentType: 'application/json',
         data: JSON.stringify(usuario),
         success: function (resp) {
-            labels += '<table data-role="table" id="movie-table" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="a" data-column-btn-text="Columas" data-column-popup-theme="a"> '
+            labels += '<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
                     + '<thead> <th data-priority="persist">Nap</th> <th data-priority="persist">Estado</th> </tr>   </thead> '
                     + '<tbody> ';
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                    labels +='<tr><td>'+object.nap+'</td> <td>'+object.estado+'</td></tr>' ;
+                    labels +='<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap+ ',\''+object.caf.nombre+'\',\''+object.estado+'\');" '    
+                        +' data-rel="popup" data-position-to="window" data-transition="pop" >'+object.nap+'</a></td> '
+                        +' <td>'+object.estado+'</td></tr>' ;
             }
             labels += '</tbody> </table>';
             $("#div-alistamientos-usuario").html(labels );
@@ -168,3 +170,7 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
         }
     });
 };
+
+function mostrarAlistamientoDetalle(nap,caf,estado) {
+    $('#alistamiento-detalle').html('<p>Caf: '+caf+'</p><p>Autorización: '+nap+'</p><p>Estado: '+estado+'</p>');
+}
