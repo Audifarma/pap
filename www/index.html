@@ -95,15 +95,15 @@
                     <a href="#popupMenu"  id="label-usuario-registrado" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-d ui-btn-icon-right ui-btn-a"></a>
                 </div>
                 <div data-role="popup" id="popupMenu" data-theme="a" style="background-color: #1A5F87" >
-                        <ul data-role="listview" data-inset="true" style="min-width:210px;">
-                                <li ><a href="#" style="border:none">Perfil</a></li>
-                            <li><a id="div-cerrar-sesion" style="border:none">Cerrar Sessión</a></li>
-                        </ul>
+                            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                                    <li><a href="#" style="border:none">Perfil</a></li>
+                        <li><a id="div-cerrar-sesion" style="border:none">Cerrar Sessión</a></li>
+                            </ul>
                 </div>
-                
+
 
                 <div class="ui-grid-a">
-                    <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#confirmar'">
+                    <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#menu-confirmar'">
                         <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;text-shadow: 2px 2px #006699; background-color: #0CB4FD;color:white;font-weight:none;padding-top: 20px">
                             <img src="images/icono_confirmar.png" alt="PAP" style="width: 60%"><br>Confirmar Orden
                         </div>
@@ -144,6 +144,26 @@
 
             </div><!-- /content -->
 
+        </div>
+        <div id="menu-confirmar" data-role="page" data-url="map-page" style="background-color: #363636" >
+            <div data-role="header" data-position="fixed" style="background-color: #0CB4FD" >
+                <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>
+                <h1>Confirmar</h1>
+            </div>
+            <br/><br/><br/>
+            <br/><br/><br/>
+            <div class="ui-grid-a" style="top: 75%;">
+                <div id="div-iniciar-confirmacion" class="ui-block-a" onclick="location.href = '#confirmar'">
+                    <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;text-shadow: 2px 2px #006699; background-color: #0CB4FD;color:white;font-weight:none;padding-top: 20px">
+                        <img src="images/icono_confirmar.png" alt="PAP" style="width: 60%"><br>Reclamar Farmacia
+                    </div>
+                </div>
+                <div id="div-iniciar-domicilio" class="ui-block-b" onclick="location.href = '#domicilio'">                                            
+                    <div class="ui-bar" style="font-size:1.2em;text-align: center;height:150px;text-shadow: 2px 2px #006699;background-color: #0DE0FE;color:white;font-weight:none;padding-top: 20px">
+                        <img src="images/icono_ordenes.png" alt="PAP" style="width: 60%"><br>Pedir Domicilio
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="confirmar" data-role="page" data-url="map-page" style="background-color: #363636" >
@@ -214,34 +234,58 @@
             </div>
         </div>
 
+        <div id="domicilio" data-role="page" data-url="map-page" style="background-color: #363636" >
+            <div data-role="header" data-position="fixed" style="background-color: #0CB4FD" >
+                <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>
+                <h1>Domicilio</h1>
+            </div>
+            <div role="main" class="ui-content" >
+                <div style="position: absolute;top: 10%;width:90%;">
+                    <br>
+                    <!--<a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini">Cambiar</a> -->
+                    <div class="ui-body ui-body-a ui-corner-all" style="border:none; background-color: rgba(51, 136, 204, 0.49)">
+                        <form style="margin:0px">
+                            <div id="div-autorizaciones-domicilio-usuario"></div>
+                        </form>
+                    </div>
+                    <br>
+
+                    <a data-rel="popup" data-transition="pop" data-position-to="window" id="btn-domicilio-confirmar"
+                       style="background-color: #0D94E6;"
+                       class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Generar Pedido</a>
+
+                </div>
+            </div>
+        </div>
+
         <div id="mis_ordenes" data-role="page" data-url="map-page" style="background-color: #363636" >
             <div data-role="header" data-position="fixed" style="background-color: #0CB4FD">
                 <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>                
                 <h1>Ordenes</h1>
             </div>
             <div role="main" class="ui-content">
-                    
-                    <div class="ui-body ui-body-a ui-corner-all" style="border:none;background-color: rgba(51, 136, 204, 0.49)" >
-                        <form style="margin:0px">
 
-                            <div id="div-alistamientos-usuario"></div>
-                        </form>
-                    </div>
-                    <br>
-                    <a href="#pap" style="background-color: #0CB4FD;"
-                       class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5" >Volver</a>
-                       
-                
-                <div data-role="popup" id="alistamiento-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;background-color: #1A5F87">
-                    <div data-role="header" data-theme="a">
-                    <h1>Alistamiento</h1>
-                    </div>
-                    <div role="main" class="ui-content">
-                        <div id="alistamiento-detalle" ></div>
-                        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cerrar</a>
-                    </div>
+                <div class="ui-body ui-body-a ui-corner-all" style="border:none;background-color: rgba(51, 136, 204, 0.49)" >
+                    <form style="margin:0px">
+
+                        <div id="div-alistamientos-usuario"></div>
+                    </form>
                 </div>
-                
+                <br>
+                <a href="#pap" style="background-color: #0CB4FD;"
+                   class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5" >Volver</a>
+
+
+                <div data-role="popup" id="alistamiento-popup" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;background-color: #1A5F87">
+                        <div data-role="header" data-theme="a">
+                            <h1>Alistamiento</h1>
+                            </div>
+                        <div role="main" class="ui-content">
+                        <div id="alistamiento-detalle" ></div>
+                                <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cerrar</a>
+                            </div>
+                </div>
+
             </div>
         </div>
 
