@@ -1,13 +1,17 @@
 var pap = pap || {};
 pap.AutorizacionController = function () {
     this.$confirmarPage = null;
+    this.$domicilioPage = null;
     this.$divAutorizacionesUsuario = null;
+    this.$divAutorizacionesDomicilioUsuario = null;
     this.$btnConfirmar = null;
     this.$membersCtrlGroup = null;
 };
 pap.AutorizacionController.prototype.init = function () {
     this.$confirmarPage = $("#confirmar");
+    this.$domicilioPage = $("#domicilio");
     this.$divAutorizacionesUsuario = $("#div-autorizaciones-usuario", this.$confirmarPage);
+    this.$divAutorizacionesDomicilioUsuario = $("#div-autorizaciones-domicilio-usuario", this.$domicilioPage);
     this.$btnConfirmar = $("#btn-confirmar", this.$confirmarPage);
     this.$membersCtrlGroup = $("#members-ctrlgroup", this.$divAutorizacionesUsuario);
 };
@@ -76,18 +80,29 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
     } else {
         alert('Seleccione las autorizaciones a confirmar.', 'Indica Autorización');
     }
-
-
 };
 
-pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario) {
+pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario, domicilio) {
+    var $divAutorizaciones = "#div-autorizaciones-usuario";
+    var $btn = "#btn-confirmar";
+    if (domicilio) {
+        $divAutorizaciones = "#div-autorizaciones-domicilio-usuario";
+        $btn = "#btn-domicilio-confirmar";
+    }
+
     var fset = '<fieldset data-role="controlgroup" id="members-ctrlgroup"><legend>Autorizaciones Usuario</legend>';
     var labels = '';
     $.mobile.loading("show");
-    $("#div-autorizaciones-usuario").html('<p>*** Cargando Autorizaciones ***</p>');
-    $("#div-autorizaciones-usuario").trigger("create");
-    $("#btn-confirmar").button();
-    $("#btn-confirmar").prop('disabled', true).button("refresh");;
+//    $("#div-autorizaciones-usuario").html('<p>*** Cargando Autorizaciones ***</p>');
+//    $("#div-autorizaciones-usuario").trigger("create");
+    $($divAutorizaciones).html('<p>*** Cargando Autorizaciones ***</p>');
+    $($divAutorizaciones).trigger("create");
+    
+//    $("#btn-confirmar").button();
+//    $("#btn-confirmar").prop('disabled', true).button("refresh");
+    $($btn).button();
+    $($btn).prop('disabled', true).button("refresh");
+    
     $.ajax({
         type: 'POST',
         url: pap.Settings.autorizacionUrl,
@@ -96,7 +111,8 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
         data: JSON.stringify(usuario),
         success: function (resp) {
             for (var i = 0; i < resp.length; i++) {
-                $("#btn-confirmar").prop('disabled', false).button("refresh");
+//                $("#btn-confirmar").prop('disabled', false).button("refresh");
+                $($btn).prop('disabled', false).button("refresh");
                 var object = JSON.parse(resp[i]);
                 labels += '<input type="checkbox" value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
                         + i
@@ -114,19 +130,25 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
                 }
                 labels += labelMx;
             }
-            $("#div-autorizaciones-usuario").html(fset + labels + '</fieldset>');
-            $("#div-autorizaciones-usuario").trigger("create");
+//            $("#div-autorizaciones-usuario").html(fset + labels + '</fieldset>');
+//            $("#div-autorizaciones-usuario").trigger("create");
+            $($divAutorizaciones).html(fset + labels + '</fieldset>');
+            $($divAutorizaciones).trigger("create");
+            
             $.mobile.loading("hide");
         }
         , error: function (e) {
             $.mobile.loading("hide");
             var mensaje = message(e);
             if (mensaje == null) {
-                $("#div-autorizaciones-usuario").html('<p>' + getMsjSoporte() + '</p>');
+//                $("#div-autorizaciones-usuario").html('<p>' + getMsjSoporte() + '</p>');
+                $($divAutorizaciones).html('<p>' + getMsjSoporte() + '</p>');
             } else {
-                $("#div-autorizaciones-usuario").html('<p>' + mensaje + '</p>');
+//                $("#div-autorizaciones-usuario").html('<p>' + mensaje + '</p>');
+                $($divAutorizaciones).html('<p>' + mensaje + '</p>');
             }
-            $("#div-autorizaciones-usuario").trigger("create");
+//            $("#div-autorizaciones-usuario").trigger("create");
+            $($divAutorizaciones).trigger("create");
         }
     });
 };
@@ -149,12 +171,12 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
                     + '<tbody> ';
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                    labels +='<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap+ ',\''+object.caf.nombre+'\',\''+object.estado+'\');" '    
-                        +' data-rel="popup" data-position-to="window" data-transition="pop" >'+object.nap+'</a></td> '
-                        +' <td>'+object.estado+'</td></tr>' ;
+                labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\');" '
+                        + ' data-rel="popup" data-position-to="window" data-transition="pop" >' + object.nap + '</a></td> '
+                        + ' <td>' + object.estado + '</td></tr>';
             }
             labels += '</tbody> </table>';
-            $("#div-alistamientos-usuario").html(labels );
+            $("#div-alistamientos-usuario").html(labels);
             $("#div-alistamientos-usuario").trigger("create");
             $.mobile.loading("hide");
         }
@@ -171,6 +193,6 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
     });
 };
 
-function mostrarAlistamientoDetalle(nap,caf,estado) {
-    $('#alistamiento-detalle').html('<p>Caf: '+caf+'</p><p>Autorización: '+nap+'</p><p>Estado: '+estado+'</p>');
+function mostrarAlistamientoDetalle(nap, caf, estado) {
+    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p>');
 }
