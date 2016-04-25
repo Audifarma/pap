@@ -136,10 +136,24 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
     });
 });
 
+$(document).delegate("#domicilio", "pagebeforecreate", function () {
+    app.autorizacionController.init();
+//    var usuario = pap.Session.getInstance().get().usuario;
+//    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+//    cargarMapa();
+//    app.autorizacionController.$btnConfirmar.off("tap").on("tap", function () {
+//        app.autorizacionController.onConfirmar();
+//    });
+});
+
 $(document).delegate("#confirmar", "pageshow", function () {
     var usuario = pap.Session.getInstance().get().usuario;
-    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
+    app.autorizacionController.cargarAutorizacionesUsuario(usuario, false);
     cargarMapa();
+});
+$(document).delegate("#domicilio", "pageshow", function () {
+    var usuario = pap.Session.getInstance().get().usuario;
+    app.autorizacionController.cargarAutorizacionesUsuario(usuario, true);
 });
 
 $(document).delegate("#mis_ordenes", "pagebeforecreate", function () {
@@ -152,7 +166,7 @@ $(document).delegate("#mis_ordenes", "pageshow", function () {
 });
 
 $(document).delegate("#pap", "pagebeforecreate", function () {
-    app.papController.init();    
+    app.papController.init();
     $("#usuario-registrado").text(pap.Session.getInstance().get().userProfileModel);
     app.papController.$labelUsuarioRegistrado.text(pap.Session.getInstance().get().userProfileModel);
     app.papController.$linkCerrarSession.off("tap").on("tap", function () {
