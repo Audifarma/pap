@@ -85,6 +85,7 @@ app.signInController = new pap.SignInController();
 //app.signOutController = new pap.SignOutController();
 app.registroUsuarioController = new pap.RegistroUsuarioController();
 app.autorizacionController = new pap.AutorizacionController();
+app.usuarioController = new pap.UsuarioController();
 app.alistamientoController = new pap.AlistamientoController();
 app.papController = new pap.PapController();
 //app.bookingsController = new pap.BookingsController();
@@ -138,12 +139,16 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
 
 $(document).delegate("#domicilio", "pagebeforecreate", function () {
     app.autorizacionController.init();
+    app.usuarioController.init();
+    app.usuarioController.cargarDireccionesUsuario(pap.Session.getInstance().get().usuario)
+    
+    
 //    var usuario = pap.Session.getInstance().get().usuario;
 //    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
 //    cargarMapa();
-//    app.autorizacionController.$btnConfirmar.off("tap").on("tap", function () {
-//        app.autorizacionController.onConfirmar();
-//    });
+    app.autorizacionController.$btnDomicilioConfirmar.off("tap").on("tap", function () {
+        app.autorizacionController.onConfirmarDomicilio();
+    });
 });
 
 $(document).delegate("#confirmar", "pageshow", function () {
