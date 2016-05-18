@@ -5,6 +5,7 @@ pap.AutorizacionController = function () {
     this.$divAutorizacionesUsuario = null;
     this.$divAutorizacionesDomicilioUsuario = null;
     this.$btnConfirmar = null;
+    this.$btnDomicilioConfirmar = null;
     this.$membersCtrlGroup = null;
 };
 pap.AutorizacionController.prototype.init = function () {
@@ -13,17 +14,60 @@ pap.AutorizacionController.prototype.init = function () {
     this.$divAutorizacionesUsuario = $("#div-autorizaciones-usuario", this.$confirmarPage);
     this.$divAutorizacionesDomicilioUsuario = $("#div-autorizaciones-domicilio-usuario", this.$domicilioPage);
     this.$btnConfirmar = $("#btn-confirmar", this.$confirmarPage);
+    this.$btnDomicilioConfirmar = $("#btn-domicilio-confirmar", this.$domicilioPage);
+
     this.$membersCtrlGroup = $("#members-ctrlgroup", this.$divAutorizacionesUsuario);
 };
+
 pap.AlistamientoController = function () {
     this.$mis_ordenesPage = null;
     this.$divAlistamientosUsuario = null;
 };
+
 pap.AlistamientoController.prototype.init = function () {
     this.$mis_ordenesPage = $("#mis_ordenes");
     this.$divAlistamientosUsuario = $("#div-alistamientos-usuario", this.$mis_ordenesPage);
 
 };
+
+pap.UsuarioController = function () {
+    this.$domicilioPage = null;
+    this.$btnDomicilioConfirmar = null;
+    this.$direccionesUsuario = null;
+};
+
+pap.UsuarioController.prototype.init = function () {
+    this.$domicilioPage = $("#domicilio");
+    this.$btnDomicilioConfirmar = $("#btn-domicilio-confirmar", this.$domicilioPage);
+    this.$direccionesUsuario = $("#direccionesUsuario", this.$domicilioPage);
+};
+
+pap.UsuarioController.prototype.cargarDireccionesUsuario = function (usuario) {
+    if ($('#direccionesUsuario').has('option').length <= 1) {
+        var data = JSON.stringify(usuario);
+        $.ajax({
+            url: pap.Settings.direccionesUsuarioUrl,
+            type: pap.Settings.TYPE_POST,
+            dataType: pap.Settings.DATA_TYPE_JSON,
+            contentType: pap.Settings.APPLICATION_JSON,
+            data: data,
+            success: function (resp) {
+                for (var n = 0; n < resp.length; n++)
+                {
+                    var object = JSON.parse(resp[n]);
+                    $('#direccionesUsuario').append($('<option>', {
+                        value: object.tUsuarioSiuDireccionesPK.direccion,
+                        text: object.municipio.nombre + ' '+ object.tUsuarioSiuDireccionesPK.direccion
+                    }));
+                } 
+                $('#direccionesUsuario').selectmenu('refresh');
+
+            }
+        });
+    }
+};
+
+
 
 pap.AutorizacionController.prototype.onConfirmar = function () {
 //    this.$membersCtrlGroup.find('INPUT').each(function () {
@@ -82,6 +126,56 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
     }
 };
 
+pap.AutorizacionController.prototype.onConfirmarDomicilio = function () {
+    var alistamientoList = [];
+    var i = 0;
+    $('#members-ctrlgroup').find('INPUT').each(function () {
+        var value = $(this).filter(':checked').val();
+        alistamiento = new Object();
+        alistamientoPK = new Object();
+        if (value != null) {
+            console.log(value);
+            alistamiento.nap = value.split('-')[0];
+            alistamientoPK.numeroAlistamiento = value.split('-')[1];
+            alistamiento.alistamientoPK = alistamientoPK;
+            alistamientoList[i] = alistamiento;
+            i++;
+        }
+    });
+
+    if (alistamientoList.length > 0) {
+        var data = JSON.stringify({alistamiento: alistamientoList});
+        $.ajax({
+            url: pap.Settings.confirmarAutorizacionUrl,
+            type: pap.Settings.TYPE_POST,
+            dataType: pap.Settings.DATA_TYPE_JSON,
+            contentType: pap.Settings.APPLICATION_JSON,
+            data: data,
+            success: function (resp) {
+                $('#members-ctrlgroup').find('INPUT').each(function () {
+                    var value = $(this).filter(':checked').val();
+                    if (value != null) {
+                        $(this).prop("checked", false).checkboxradio("refresh");
+                        $(this).attr("disabled", true);
+                    }
+                });
+
+                alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
+            },
+            error: function (e) {
+                var mensaje = message(e);
+                if (mensaje == null) {
+                    mensajeSoporte();
+                } else {
+                    alert(mensaje);
+                }
+            }
+        });
+    } else {
+        alert('Seleccione las autorizaciones que desea a domicilio.', 'Indica Autorización');
+    }
+};
+
 pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usuario, domicilio) {
     var $divAutorizaciones = "#div-autorizaciones-usuario";
     var $btn = "#btn-confirmar";
@@ -97,12 +191,12 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //    $("#div-autorizaciones-usuario").trigger("create");
     $($divAutorizaciones).html('<p>*** Cargando Autorizaciones ***</p>');
     $($divAutorizaciones).trigger("create");
-    
+
 //    $("#btn-confirmar").button();
 //    $("#btn-confirmar").prop('disabled', true).button("refresh");
     $($btn).button();
     $($btn).prop('disabled', true).button("refresh");
-    
+
     $.ajax({
         type: 'POST',
         url: pap.Settings.autorizacionUrl,
@@ -134,7 +228,7 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //            $("#div-autorizaciones-usuario").trigger("create");
             $($divAutorizaciones).html(fset + labels + '</fieldset>');
             $($divAutorizaciones).trigger("create");
-            
+
             $.mobile.loading("hide");
         }
         , error: function (e) {
