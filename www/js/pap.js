@@ -62,6 +62,10 @@ function cargarDepartamentos() {
                         value: object.codigo,
                         text: object.nombre
                     }));
+                    $('#departamentoEnvio').append($('<option>', {
+                        value: object.codigo,
+                        text: object.nombre
+                    }));
                 }
 
             }
@@ -83,7 +87,7 @@ function cargarDepartamentosMapa() {
                     $('#departamentoMapa').append($('<option>', {
                         value: object.codigo,
                         text: object.nombre
-                    }));
+                    }));   
                 }
 
             }
