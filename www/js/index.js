@@ -138,17 +138,18 @@ $(document).delegate("#confirmar", "pagebeforecreate", function () {
 });
 
 $(document).delegate("#domicilio", "pagebeforecreate", function () {
-    app.autorizacionController.init();
+//    app.autorizacionController.init();
     app.usuarioController.init();
     app.usuarioController.cargarDireccionesUsuario(pap.Session.getInstance().get().usuario)
-    
-    
-//    var usuario = pap.Session.getInstance().get().usuario;
-//    app.autorizacionController.cargarAutorizacionesUsuario(usuario);
-//    cargarMapa();
-    app.autorizacionController.$btnDomicilioConfirmar.off("tap").on("tap", function () {
-        app.autorizacionController.onConfirmarDomicilio();
+    app.usuarioController.$btnDomicilioConfirmar.off("tap").on("tap", function () {
+        app.usuarioController.onConfirmarDomicilio();
     });
+
+    app.usuarioController.$departamentoEnvio.change(function () {
+        app.usuarioController.cargarMunicipiosEnvio();
+    });
+
+
 });
 
 $(document).delegate("#confirmar", "pageshow", function () {
