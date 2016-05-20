@@ -34,12 +34,19 @@ pap.UsuarioController = function () {
     this.$domicilioPage = null;
     this.$btnDomicilioConfirmar = null;
     this.$direccionesUsuario = null;
+    this.$departamentoEnvio = null;
+    this.$municipioEnvio = null;
+    this.$direccionEnvio = null;
 };
 
 pap.UsuarioController.prototype.init = function () {
     this.$domicilioPage = $("#domicilio");
     this.$btnDomicilioConfirmar = $("#btn-domicilio-confirmar", this.$domicilioPage);
     this.$direccionesUsuario = $("#direccionesUsuario", this.$domicilioPage);
+    this.$departamentoEnvio = $("#departamentoEnvio", this.$domicilioPage);
+    this.$municipioEnvio = $("#municipioEnvio", this.$domicilioPage);
+    this.$direccionEnvio = $("#direccionEnvio", this.$domicilioPage);
+
 };
 
 pap.UsuarioController.prototype.cargarDireccionesUsuario = function (usuario) {
@@ -65,6 +72,33 @@ pap.UsuarioController.prototype.cargarDireccionesUsuario = function (usuario) {
             }
         });
     }
+};
+
+pap.UsuarioController.prototype.cargarMunicipiosEnvio = function () {
+    var codDepartamento = this.$departamentoEnvio.val();
+    this.$municipioEnvio.find('option').remove();
+    this.$municipioEnvio.append($('<option>', {
+        value: -1,
+        text: 'Seleccione Ciudad Envio'
+    }, true));
+
+    $.ajax({
+        url: pap.Settings.municipiosUrl + codDepartamento,
+        type: pap.Settings.TYPE_GET,
+        dataType: pap.Settings.DATA_TYPE_JSON,
+        contentType: pap.Settings.APPLICATION_JSON,
+        success: function (resp) {
+            for (var n = 0; n < resp.length; n++)
+            {
+                var object = JSON.parse(resp[n]);
+                $('#municipioEnvio').append($('<option>', {
+                    value: object.codigo,
+                    text: object.nombre
+                }));
+            }
+        }
+    });
+    this.$municipioEnvio.selectmenu('refresh');
 };
 
 
@@ -127,9 +161,33 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
     }
 };
 
-pap.AutorizacionController.prototype.onConfirmarDomicilio = function () {
+pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
     var alistamientoList = [];
-    var i = 0;
+    var i = 0, invisibleStyle = "bi-invisible", invalidInputStyle = "bi-invalid-input", invalidSelect = "bi-invalid-select", camposValidos = true;
+
+    this.$departamentoEnvio.removeClass(invalidSelect);
+    this.$municipioEnvio.removeClass(invalidSelect);
+    this.$direccionEnvio.removeClass(invalidInputStyle);
+
+    if (this.$departamentoEnvio.val() == -1) {
+        this.$departamentoEnvio.addClass(invalidSelect);
+        camposValidos = false;
+    }
+    if (this.$municipioEnvio.val() == -1) {
+        this.$municipioEnvio.addClass(invalidSelect);
+        camposValidos = false;
+    }
+    if (this.$direccionEnvio.length <= 1) {
+        this.$direccionEnvio.addClass(invalidInputStyle);
+        camposValidos = false;
+    }
+    this.$departamentoEnvio.selectmenu('refresh');
+    this.$municipioEnvio.selectmenu('refresh');
+    if (!camposValidos) {
+        alert('valide los campos.');
+        return;
+    }
+
     $('#members-ctrlgroup').find('INPUT').each(function () {
         var value = $(this).filter(':checked').val();
         alistamiento = new Object();
