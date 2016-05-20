@@ -14,7 +14,7 @@ var alistamientoPK = {
 };
 
 var alistamiento = {
-    alistamientoPK: alistamientoPK, nap: null
+    alistamientoPK: alistamientoPK, nap: null, estado: null
 };
 
 //var servicio = "http://10.1.1.185:8095/paprs/webresources/";
@@ -24,6 +24,9 @@ var alistamiento = {
 
 var pap = pap || {};
 pap.Settings = pap.Settings || {};
+pap.Estados = pap.Estados || {};
+pap.Estados.ALISTAR_PAP_MOVIL = 'ALISTAR_PAP_MOVIL';
+pap.Estados.ALISTAR_PAP_MOVIL_DOMICILIO = 'ALISTAR_PAP_MOVIL_DOMICILIO';
 pap.Settings.TYPE_POST = 'POST';
 pap.Settings.TYPE_GET = 'GET';
 pap.Settings.APPLICATION_JSON = 'application/json';

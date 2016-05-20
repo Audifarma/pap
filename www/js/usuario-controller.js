@@ -57,9 +57,9 @@ pap.UsuarioController.prototype.cargarDireccionesUsuario = function (usuario) {
                     var object = JSON.parse(resp[n]);
                     $('#direccionesUsuario').append($('<option>', {
                         value: object.tUsuarioSiuDireccionesPK.direccion,
-                        text: object.municipio.nombre + ' '+ object.tUsuarioSiuDireccionesPK.direccion
+                        text: object.municipio.nombre + ' ' + object.tUsuarioSiuDireccionesPK.direccion
                     }));
-                } 
+                }
                 $('#direccionesUsuario').selectmenu('refresh');
 
             }
@@ -88,6 +88,7 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
             alistamiento.nap = value.split('-')[0];
             alistamientoPK.numeroAlistamiento = value.split('-')[1];
             alistamiento.alistamientoPK = alistamientoPK;
+            alistamiento.estado = pap.Estados.ALISTAR_PAP_MOVIL;
             alistamientoList[i] = alistamiento;
             i++;
         }
@@ -138,6 +139,7 @@ pap.AutorizacionController.prototype.onConfirmarDomicilio = function () {
             alistamiento.nap = value.split('-')[0];
             alistamientoPK.numeroAlistamiento = value.split('-')[1];
             alistamiento.alistamientoPK = alistamientoPK;
+            alistamiento.estado = pap.Estados.ALISTAR_PAP_MOVIL_DOMICILIO;
             alistamientoList[i] = alistamiento;
             i++;
         }
