@@ -148,6 +148,9 @@ $(document).delegate("#domicilio", "pagebeforecreate", function () {
     app.usuarioController.$departamentoEnvio.change(function () {
         app.usuarioController.cargarMunicipiosEnvio();
     });
+    app.usuarioController.$direccionesUsuario.change(function () {
+        app.usuarioController.onSeleccionarDireccion();
+    });
 
 
 });

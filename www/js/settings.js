@@ -2,7 +2,7 @@ var servicio = "http://190.14.226.155:8095/paprs/webresources/";
 
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,
-    clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null, regId: null
+    clave: null, claveConfirmacion: null, sexo: null, direccion: null, telefono: null, telefonoCelular: null, regId: null, tUsuarioSiuDirecciones: tUsuarioSiuDirecciones
 };
 
 var solicitudRegistro = {
@@ -17,6 +17,13 @@ var alistamiento = {
     alistamientoPK: alistamientoPK, nap: null, estado: null
 };
 
+var tUsuarioSiuDireccionesPK = {
+    codTipoDocumento: 0, documentoIdentidad: null, codMpio: 0, direccion: null
+};
+
+var tUsuarioSiuDirecciones = {
+    tUsuarioSiuDireccionesPK: tUsuarioSiuDireccionesPK, telefono: null
+};
 //var servicio = "http://10.1.1.185:8095/paprs/webresources/";
 //var servicio = "http://localhost:9090/webresources/";
 //var servicio = "http://localhost:8080/webresources/";
