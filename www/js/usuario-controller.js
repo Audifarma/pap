@@ -426,7 +426,7 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
                 for (var j = 0; j < object.AlistamientoMedicamentoComercialList.length; j++) {
                     medicamentos += '<tr><td >'+object.AlistamientoMedicamentoComercialList[j].descripcion +'</td><td>'+object.AlistamientoMedicamentoComercialList[j].cantidad+'</td></tr>';
                 }
-                labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\',\'' + medicamentos + '\');" '
+                labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\',\'' + object.fechaRegistro + '\',\'' + medicamentos + '\');" '
                         + ' data-rel="popup" data-position-to="window" data-transition="pop" >' + object.nap + '</a></td> '
                         + ' <td>' + object.estado + '</td><td>' + object.fechaRegistro + '</td></tr>';
             }
@@ -448,8 +448,8 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
     });
 };
 
-function mostrarAlistamientoDetalle(nap, caf, estado,medicamentos) {
-    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p>Medicamentos: ' 
+function mostrarAlistamientoDetalle(nap, caf, estado,fecha,medicamentos) {
+    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p><p>Fecha solicitud: ' + fecha + '</p>Medicamentos: ' 
             +'<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
             + '<thead> <th data-priority="persist">Nombre</th> <th data-priority="persist">Cantidad</th></tr></thead> '
             + '<tbody> ' + medicamentos + '</tbody> </table>');
