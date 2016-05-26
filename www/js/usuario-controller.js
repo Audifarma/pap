@@ -363,7 +363,7 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //                $("#btn-confirmar").prop('disabled', false).button("refresh");
                 $($btn).prop('disabled', false).button("refresh");
                 var object = JSON.parse(resp[i]);
-                labels += '<input type="checkbox" value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
+                labels += '<input type="checkbox" checked value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
                         + i
                         + '"><label for="s'
                         + i
@@ -416,13 +416,13 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
         data: JSON.stringify(usuario),
         success: function (resp) {
             labels += '<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
-                    + '<thead> <th data-priority="persist">Nap</th> <th data-priority="persist">Estado</th> </tr>   </thead> '
+                    + '<thead> <th data-priority="persist">Nap</th> <th data-priority="persist">Estado</th><th data-priority="persist">Fecha</th> </tr>   </thead> '
                     + '<tbody> ';
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
                 labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\');" '
                         + ' data-rel="popup" data-position-to="window" data-transition="pop" >' + object.nap + '</a></td> '
-                        + ' <td>' + object.estado + '</td></tr>';
+                        + ' <td>' + object.estado + '</td><td>' + object.fechaRegistro + '</td></tr>';
             }
             labels += '</tbody> </table>';
             $("#div-alistamientos-usuario").html(labels);
