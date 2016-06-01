@@ -212,6 +212,7 @@ pap.SignInController.prototype.onRememberCommand = function () {
             if (resp.success === true) {
                 // Create session.                 
                 me.$ctnErr.html("<p>Los datos de ingreso serán enviados al correo registrado.</p>");
+                me.$ctnErr.addClass("bi-ctn-err").slideDown();
                 // Go to main menu.
                 //$.mobile.navigate(me.$signInPage);
                 return;
