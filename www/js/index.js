@@ -143,6 +143,7 @@ $(document).delegate("#domicilio", "pagebeforecreate", function () {
     app.usuarioController.cargarDireccionesUsuario(pap.Session.getInstance().get().usuario)
     app.usuarioController.$btnDomicilioConfirmar.off("tap").on("tap", function () {
         app.usuarioController.onConfirmarDomicilio();
+        app.usuarioController.cargarDireccionesUsuario(pap.Session.getInstance().get().usuario)
     });
 
     app.usuarioController.$departamentoEnvio.change(function () {
