@@ -166,12 +166,12 @@ function registrarUsuario() {
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
 
     if (validarRegistroUsuario(usuario, solicitudRegistro)) {
-        alert('Por favor ingresa los datos requeridos.')
+        alert('Registro de Usuario','Por favor ingrese los datos requeridos.')
         return;
     }
 
     if (!$('#acuerdoUsuario').is(":checked")) {
-        alert('Acepta los terminos y condiciones');
+        alert('Registro de Usuario','Acepte los terminos y condiciones');
         return;
     }
 
