@@ -97,14 +97,14 @@ pap.RegistroUsuarioController.prototype.validarRegistroUsuario = function (usuar
         this.$correoUsuario.addClass(invalidInputStyle);
         invalidInput = true;
     }
-    if (usuario.telefono.length === 0) {
-        if (usuario.telefonoCelular.length === 0) {
+    if (usuario.telefono.length <= 6) {
+        if (usuario.telefonoCelular.length <= 6) {
             this.$telefonoUsuario.addClass(invalidInputStyle);
             invalidInput = true;
         }
     }
-    if (usuario.telefonoCelular.length === 0) {
-        if (usuario.telefono.length === 0) {
+    if (usuario.telefonoCelular.length <= 6) {
+        if (usuario.telefono.length <= 6) {
             this.$celularUsuario.addClass(invalidInputStyle);
             invalidInput = true;
         }
