@@ -87,7 +87,7 @@ function cargarDepartamentosMapa() {
                     $('#departamentoMapa').append($('<option>', {
                         value: object.codigo,
                         text: object.nombre
-                    }));   
+                    }));
                 }
 
             }
@@ -166,12 +166,12 @@ function registrarUsuario() {
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
 
     if (validarRegistroUsuario(usuario, solicitudRegistro)) {
-        alert('Registro de Usuario','Por favor ingrese los datos requeridos.')
+        alert('Registro de Usuario', 'Por favor ingrese los datos requeridos.')
         return;
     }
 
     if (!$('#acuerdoUsuario').is(":checked")) {
-        alert('Registro de Usuario','Acepte los terminos y condiciones');
+        alert('Registro de Usuario', 'Acepte los terminos y condiciones');
         return;
     }
 
@@ -195,7 +195,7 @@ function registrarUsuario() {
             if (mensaje == null) {
                 mensajeSoporte();
             } else {
-                alert(mensaje);
+                alert('Registro de Usuario', mensaje);
             }
         }
     });
