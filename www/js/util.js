@@ -7,7 +7,7 @@ function message(e) {
     if (html != null) {
         for (var i = 0; i < html.length; i++) {
             if (html[i].innerHTML != null && html[i].innerHTML.indexOf('java.lang') !== -1) {
-                return html[i].innerHTML.split(":")[1];
+                return html[i].innerHTML.split(":")[1].replace("&lt;","<").replace("&gt;",">");
             }
         }
     }
