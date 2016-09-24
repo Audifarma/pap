@@ -166,12 +166,12 @@ function registrarUsuario() {
     solicitudRegistro.codCiudad = document.getElementById("municipioUsuario").value;
 
     if (validarRegistroUsuario(usuario, solicitudRegistro)) {
-        alert('Registro de Usuario', 'Por favor ingrese los datos requeridos.')
+        mensajeAlerta('Registro de Usuario','Por favor ingrese los datos requeridos.');
         return;
     }
 
     if (!$('#acuerdoUsuario').is(":checked")) {
-        alert('Registro de Usuario', 'Acepte los terminos y condiciones');
+        mensajeAlerta('Registro de Usuario', 'Acepte los terminos y condiciones');
         return;
     }
 
@@ -187,7 +187,7 @@ function registrarUsuario() {
         data: data,
         success: function (resp) {
             //función cargar cupones usuario.
-            alert('Creación de Usuario', 'Usuario creado correctamente. ');
+            mensajeAlerta('Creación de Usuario', 'Usuario creado correctamente. ');
             $.mobile.navigate("#page-signin");
         },
         error: function (e) {
@@ -195,7 +195,7 @@ function registrarUsuario() {
             if (mensaje == null) {
                 mensajeSoporte();
             } else {
-                alert('Registro de Usuario', mensaje);
+                mensajeAlerta('Registro de Usuario', mensaje);
             }
         }
     });
@@ -217,7 +217,7 @@ function cargarAutorizacionesUsuario() {
             if (mensaje == null) {
                 mensajeSoporte();
             } else {
-                alert(mensaje);
+                mensajeAlerta('Error',mensaje);
             }
         }
     });
@@ -360,14 +360,14 @@ function iniciarSesion() {
         data: JSON.stringify(usuario),
         success: function (resp) {
             //función cargar cupones usuario.
-            alert('Usuario logueado');
+            mensajeAlerta('Inicio de Sessión','Usuario logueado');
         },
         error: function (e) {
             var mensaje = message(e);
             if (mensaje == null) {
                 mensajeSoporte();
             } else {
-                alert(mensaje);
+                mensajeAlerta('Error',mensaje);
             }
         }
     });

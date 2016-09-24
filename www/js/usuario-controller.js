@@ -161,19 +161,19 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
                     }
                 });
 
-                alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
+                mensajeAlerta('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
             },
             error: function (e) {
                 var mensaje = message(e);
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    alert(mensaje);
+                    mensajeAlerta('Error',mensaje);
                 }
             }
         });
     } else {
-        alert('Seleccione las autorizaciones a confirmar.', 'Indica Autorización');
+        mensajeAlerta('Seleccione las autorizaciones a confirmar.', 'Indica Autorización');
     }
 };
 
@@ -315,19 +315,19 @@ pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
                     }
                 });
 
-                alert('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
+                mensajeAlerta('Autorizaciones Alistadas', 'Se envío la solicitud de alistar las solicitudes indicadas.');
             },
             error: function (e) {
                 var mensaje = message(e);
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    alert(mensaje);
+                    mensajeAlerta('Error',mensaje);
                 }
             }
         });
     } else {
-        alert('Seleccione las autorizaciones que desea a domicilio.', 'Indica Autorización');
+        mensajeAlerta('Seleccione las autorizaciones que desea a domicilio.', 'Indica Autorización');
     }
 };
 

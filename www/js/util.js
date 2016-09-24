@@ -7,14 +7,14 @@ function message(e) {
     if (html != null) {
         for (var i = 0; i < html.length; i++) {
             if (html[i].innerHTML != null && html[i].innerHTML.indexOf('java.lang') !== -1) {
-                return html[i].innerHTML.split(":")[1].replace("&lt;","<").replace("&lt;","<").replace("&gt;",">").replace("&gt;",">")
+                return html[i].innerHTML.split(":")[1];
             }
         }
     }
 }
 
 function mensajeSoporte() {
-    alert('Error no controlado, contactenos para asistirte o intenta de nuevo.');
+    mensajeAlerta('Error','Error no controlado, contactenos para asistirte o intenta de nuevo.');
 }
 
 function getMsjSoporte() {
@@ -25,3 +25,11 @@ function getMsjSoporte() {
 function status() {
     return "<center><img src='./img/spinner.gif'/></center>";
 }
+
+function mensajeAlerta(titulo, mensaje) {
+    navigator.notification.confirm(mensaje, null, titulo, 'Aceptar');
+}
+function redireccionarRegistro(buttonIndex){
+    if (buttonIndex==2) $.mobile.navigate("#divRegistrarUsuario");
+}
+

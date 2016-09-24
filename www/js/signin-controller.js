@@ -32,7 +32,7 @@ pap.SignInController.prototype.initRemember = function () {
     this.papPageId = "#pap";
     this.$btnSubmit = $("#btn-submit", this.$remeberPage);
     this.$ctnErr = $("#ctn-err", this.$remeberPage);
-    this.$txtdocumento = $("#txt-documento", this.$remeberPage);           
+    this.$txtdocumento = $("#txt-documento", this.$remeberPage);
 };
 
 
@@ -161,7 +161,15 @@ pap.SignInController.prototype.onSignInCommand = function () {
             var mensaje = message(e);
             if (mensaje == null) {
                 me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
-            } else {
+            } else if (mensaje.localeCompare("MSG_USUARIO_NO_EXISTE")) {
+                navigator.notification.confirm(
+                        'El usuario ingresado no existe', // message
+                        redireccionarRegistro, // callback to invoke
+                        'Ingreso de Usuario', // title
+                        ['Intentar nuevamente','Registrarse']             // buttonLabels
+                        );
+            }
+            else {
                 me.$ctnErr.html("<p>" + mensaje + "</p>");
             }
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
@@ -242,7 +250,15 @@ pap.SignInController.prototype.onRememberCommand = function () {
             var mensaje = message(e);
             if (mensaje == null) {
                 me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido enviar la información.  Por favor intentelo en unos minutos.</p>");
-            } else {
+            } else if (mensaje.localeCompare("MSG_OLVIDO_CLAVE")) {
+                navigator.notification.confirm(
+                        'El usuario ingresado no existe', // message
+                        redireccionarRegistro, // callback to invoke
+                        'Ingreso de Usuario', // title
+                        ['Intentar nuevamente','Registrarse']             // buttonLabels
+                        );
+            }
+            else {
                 me.$ctnErr.html("<p>" + mensaje + "</p>");
             }
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
