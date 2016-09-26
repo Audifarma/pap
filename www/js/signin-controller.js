@@ -10,7 +10,7 @@ pap.SignInController = function () {
     this.$txtPassword = null;
     this.$txtRegId = null;
     this.$chkKeepSignedIn = null;
-    this.$remeberPage =null;
+    this.$remeberPage = null;
 };
 
 pap.SignInController.prototype.init = function () {
@@ -155,21 +155,28 @@ pap.SignInController.prototype.onSignInCommand = function () {
         },
         error: function (e) {
             $.mobile.loading("hide");
-            console.log(e.message);
+
             // TODO: Use a friendlier error message below.
 //            me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
             var mensaje = message(e);
+            console.log(mensaje);
             if (mensaje == null) {
                 me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido iniciar sesión.  Por favor intentelo en unos minutos.</p>");
-            } else if (mensaje.localeCompare("MSG_USUARIO_NO_EXISTE")) {
+            } else if (mensaje == "MSG_USUARIO_NO_EXISTE") {
                 navigator.notification.confirm(
                         'El usuario ingresado no existe', // message
                         redireccionarRegistro, // callback to invoke
                         'Ingreso de Usuario', // title
-                        ['Intentar nuevamente','Registrarse']             // buttonLabels
+                        ['Intentar nuevamente', 'Registrarse']             // buttonLabels
                         );
-            }
-            else {
+            } else if (mensaje == "MSG_OLVIDO_CLAVE") {
+                navigator.notification.confirm(
+                        'La clave ingresada no es correcta.', // message
+                        redireccionarRecordarClave, // callback to invoke
+                        'Ingreso de Usuario', // title
+                        ['Intentar nuevamente', 'Recordar Contraseña']             // buttonLabels
+                        );
+            } else {
                 me.$ctnErr.html("<p>" + mensaje + "</p>");
             }
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
@@ -250,15 +257,14 @@ pap.SignInController.prototype.onRememberCommand = function () {
             var mensaje = message(e);
             if (mensaje == null) {
                 me.$ctnErr.html("<p>Ocurrio un problema y no se ha podido enviar la información.  Por favor intentelo en unos minutos.</p>");
-            } else if (mensaje.localeCompare("MSG_OLVIDO_CLAVE")) {
+            } else if (mensaje == "MSG_USUARIO_NO_EXISTE") {
                 navigator.notification.confirm(
                         'El usuario ingresado no existe', // message
                         redireccionarRegistro, // callback to invoke
                         'Ingreso de Usuario', // title
-                        ['Intentar nuevamente','Registrarse']             // buttonLabels
+                        ['Intentar nuevamente', 'Registrarse']             // buttonLabels
                         );
-            }
-            else {
+            } else {
                 me.$ctnErr.html("<p>" + mensaje + "</p>");
             }
             me.$ctnErr.addClass("bi-ctn-err").slideDown();
