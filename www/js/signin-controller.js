@@ -7,6 +7,7 @@ pap.SignInController = function () {
     this.$btnSubmit = null;
     this.$ctnErr = null;
     this.$txtdocumento = null;
+    this.$txtdocumentoRecordar = null;
     this.$txtPassword = null;
     this.$txtRegId = null;
     this.$chkKeepSignedIn = null;
@@ -32,7 +33,7 @@ pap.SignInController.prototype.initRemember = function () {
     this.papPageId = "#pap";
     this.$btnSubmit = $("#btn-submit", this.$remeberPage);
     this.$ctnErr = $("#ctn-err", this.$remeberPage);
-    this.$txtdocumento = $("#txt-documento", this.$remeberPage);
+    this.$txtdocumentoRecordar = $("#txt-documento-recordar", this.$remeberPage);
 };
 
 
@@ -187,7 +188,7 @@ pap.SignInController.prototype.onSignInCommand = function () {
 pap.SignInController.prototype.onRememberCommand = function () {
     var usuario = pap.Settings.usuario;
     var me = this,
-            emailAddress = me.$txtdocumento.val().trim(),
+            emailAddress = me.$txtdocumentoRecordar.val().trim(),
             password = me.$txtPassword.val().trim(),
             regId = me.$txtRegId.val().trim(),
             invalidInput = false,
@@ -196,12 +197,12 @@ pap.SignInController.prototype.onRememberCommand = function () {
 
     // Reset styles.
     me.$ctnErr.removeClass().addClass(invisibleStyle);
-    me.$txtdocumento.removeClass(invalidInputStyle);
+    me.$txtdocumentoRecordar.removeClass(invalidInputStyle);
     me.$txtPassword.removeClass(invalidInputStyle);
 
     // Flag each invalid field.
     if (emailAddress.length === 0) {
-        me.$txtdocumento.addClass(invalidInputStyle);
+        me.$txtdocumentoRecordar.addClass(invalidInputStyle);
         invalidInput = true;
     }
 
@@ -243,7 +244,7 @@ pap.SignInController.prototype.onRememberCommand = function () {
                         case pap.ApiMessages.EMAIL_NOT_FOUND:
                             me.$ctnErr.html("<p>Usuario o contraseña incorrectos.  Por favor intentelo nuevamente.</p>");
                             me.$ctnErr.addClass("bi-ctn-err").slideDown();
-                            me.$txtdocumento.addClass(invalidInputStyle);
+                            me.$txtdocumentoRecordar.addClass(invalidInputStyle);
                             break;
                     }
                 }
