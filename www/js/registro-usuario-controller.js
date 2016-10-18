@@ -59,63 +59,104 @@ pap.RegistroUsuarioController.prototype.validarRegistroUsuario = function (usuar
 
     if (usuario.codTipoDocumento === -1 || usuario.codTipoDocumento.length === 0) {
         this.$tipoDocumentoUsuario.addClass(invalidInputStyle);
+        this.$tipoDocumentoUsuario.focus();
         invalidInput = true;
     }
     if (usuario.documentoIdentidad.length === 0) {
         this.$documentoUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$documentoUsuario.focus();
+            invalidInput = true;
+        }
+
     }
     if (usuario.nombre.length === 0) {
         this.$nombreUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$nombreUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (usuario.apellido.length === 0) {
         this.$apellidoUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$apellidoUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (solicitudRegistro.codCliente == -1) {
         this.$epsUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$epsUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (usuario.fechaNacimiento.length === 0) {
         this.$fechaNacimientoUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$fechaNacimientoUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (solicitudRegistro.codDpto == -1) {
         this.$departamentoUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$departamentoUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (solicitudRegistro.codCiudad == -1) {
         this.$municipioUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$municipioUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (usuario.direccion.length === 0) {
         this.$direccionUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$direccionUsuario.focus();
+            invalidInput = true;
+        }
     }
-    if (usuario.correo.length === 0) {
+    if (usuario.correo.length === 0 || !validarCorreo(usuario.correo)) {
         this.$correoUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$correoUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (usuario.telefono.length <= 6) {
-        if (usuario.telefonoCelular.length <= 6) {
+        if (usuario.telefonoCelular.length != 10 || usuario.telefono.length > 0) {
             this.$telefonoUsuario.addClass(invalidInputStyle);
-            invalidInput = true;
+            if (!invalidInput) {
+                this.$telefonoUsuario.focus();
+                invalidInput = true;
+            }
         }
     }
-    if (usuario.telefonoCelular.length <= 6) {
-        if (usuario.telefono.length <= 6) {
+    if (usuario.telefonoCelular.length != 10) {
+        if (usuario.telefono.length <= 6 || usuario.telefonoCelular.length > 0) {
             this.$celularUsuario.addClass(invalidInputStyle);
-            invalidInput = true;
+            if (!invalidInput) {
+                this.$celularUsuario.focus();
+                invalidInput = true;
+            }
         }
     }
-    if (usuario.clave.length === 0) {
+    if (usuario.clave.length < 5) {
         this.$claveUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$claveUsuario.focus();
+            invalidInput = true;
+        }
     }
     if (usuario.claveConfirmacion.length === 0) {
         this.$claveConfirmacionUsuario.addClass(invalidInputStyle);
-        invalidInput = true;
+        if (!invalidInput) {
+            this.$claveConfirmacionUsuario.focus();
+            invalidInput = true;
+        }
     }
 
     this.$epsUsuario.selectmenu('refresh');
