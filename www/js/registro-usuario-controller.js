@@ -159,6 +159,15 @@ pap.RegistroUsuarioController.prototype.validarRegistroUsuario = function (usuar
         }
     }
 
+    if (usuario.clave != usuario.claveConfirmacion) {
+        this.$claveUsuario.addClass(invalidInputStyle);
+        this.$claveConfirmacionUsuario.addClass(invalidInputStyle);
+        if (!invalidInput) {
+            this.$claveConfirmacionUsuario.focus();
+            invalidInput = true;
+        }
+    }
+
     this.$epsUsuario.selectmenu('refresh');
     this.$departamentoUsuario.selectmenu('refresh');
     this.$municipioUsuario.selectmenu('refresh');
