@@ -112,7 +112,7 @@ pap.RegistroUsuarioController.prototype.validarRegistroUsuario = function (usuar
             invalidInput = true;
         }
     }
-    if (usuario.direccion.length === 0) {
+    if (usuario.direccion.length < 5) {
         this.$direccionUsuario.addClass(invalidInputStyle);
         if (!invalidInput) {
             this.$direccionUsuario.focus();
