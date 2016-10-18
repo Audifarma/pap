@@ -41,3 +41,10 @@ function redireccionarRecordarClave(buttonIndex) {
     }
 }
 
+function validarCorreo(direccionCorreo) {
+    if (/^[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}$/.test(direccionCorreo))
+        return true;
+    else
+        return false;
+}
+
