@@ -168,7 +168,7 @@ pap.AutorizacionController.prototype.onConfirmar = function () {
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    mensajeAlerta('Error',mensaje);
+                    mensajeAlerta('Error', mensaje);
                 }
             }
         });
@@ -186,7 +186,7 @@ pap.UsuarioController.prototype.onSeleccionarDireccion = function () {
     obj = JSON.parse(value);
 //    console.log(obj.d[0].direccion);
     this.$departamentoEnvio.val(obj.d[0].codDepartamento);
-    
+
     this.$municipioEnvio.find('option').remove();
     this.$municipioEnvio.append($('<option>', {
         value: -1,
@@ -211,7 +211,7 @@ pap.UsuarioController.prototype.onSeleccionarDireccion = function () {
             $('#municipioEnvio').selectmenu('refresh');
         }
     });
-    
+
 //    var optionValues = [];
 //
 //    this.$municipioEnvio.each(function () {
@@ -245,12 +245,14 @@ pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
         this.$municipioEnvio.addClass(invalidSelect);
         camposValidos = false;
     }
-    if (this.$direccionEnvio.length <= 0) {
+    if (this.$direccionEnvio.length <= 5) {
         this.$direccionEnvio.addClass(invalidInputStyle);
         camposValidos = false;
     }
-    if (this.$telefonoEnvio.length <= 0) {
+
+    if (this.$telefonoEnvio.length <= 6) {
         this.$telefonoEnvio.addClass(invalidInputStyle);
+        telefonoInvalido = true;
         camposValidos = false;
     }
 //    if (this.$telefonoEnvio.length > 45) {
@@ -263,7 +265,7 @@ pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
     if (!camposValidos) {
         var html = '<p>Porfavor ingrese los datos requeridos.';
         if (telefonoInvalido) {
-            html += '<br/>Valide el tamaño y estructura del telefono.';
+            html += '<br/>Valide el tamaño y estructura del teléfono.';
         }
         html += '</p>';
         this.$domicilioErr.html(html);
@@ -322,7 +324,7 @@ pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
                 if (mensaje == null) {
                     mensajeSoporte();
                 } else {
-                    mensajeAlerta('Error',mensaje);
+                    mensajeAlerta('Error', mensaje);
                 }
             }
         });
@@ -421,10 +423,10 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
                     + '<tbody> ';
             for (var i = 0; i < resp.length; i++) {
                 var object = JSON.parse(resp[i]);
-                medicamentos='';
+                medicamentos = '';
                 //medicamentos=object.medicamentoComercialList;
                 for (var j = 0; j < object.AlistamientoMedicamentoComercialList.length; j++) {
-                    medicamentos += '<tr><td >'+object.AlistamientoMedicamentoComercialList[j].descripcion +'</td><td>'+object.AlistamientoMedicamentoComercialList[j].cantidad+'</td></tr>';
+                    medicamentos += '<tr><td >' + object.AlistamientoMedicamentoComercialList[j].descripcion + '</td><td>' + object.AlistamientoMedicamentoComercialList[j].cantidad + '</td></tr>';
                 }
                 labels += '<tr><td><a href="#alistamiento-popup" onclick="mostrarAlistamientoDetalle(' + object.nap + ',\'' + object.caf.nombre + '\',\'' + object.estado + '\',\'' + object.fechaRegistro + '\',\'' + medicamentos + '\');" '
                         + ' data-rel="popup" data-position-to="window" data-transition="pop" >' + object.nap + '</a></td> '
@@ -448,9 +450,9 @@ pap.AlistamientoController.prototype.cargarAlistamientosUsuario = function (usua
     });
 };
 
-function mostrarAlistamientoDetalle(nap, caf, estado,fecha,medicamentos) {
-    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p><p>Fecha solicitud: ' + fecha + '</p>Medicamentos: ' 
-            +'<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
+function mostrarAlistamientoDetalle(nap, caf, estado, fecha, medicamentos) {
+    $('#alistamiento-detalle').html('<p>Caf: ' + caf + '</p><p>Autorización: ' + nap + '</p><p>Estado: ' + estado + '</p><p>Fecha solicitud: ' + fecha + '</p>Medicamentos: '
+            + '<table data-role="table" id="movie-table" data-mode="column" class="ui-body-d ui-shadow table-stripe ui-responsive"  data-column-popup-theme="a"> '
             + '<thead> <th data-priority="persist">Nombre</th> <th data-priority="persist">Cantidad</th></tr></thead> '
             + '<tbody> ' + medicamentos + '</tbody> </table>');
 }
