@@ -2,9 +2,10 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    
 }
 h1,h2,h3,h4,h5 {
-    color: #FFFFFF;
+    color: #000000;
 }
 
 /* Begin jqm overrides */
@@ -13,7 +14,7 @@ h1,h2,h3,h4,h5 {
     border-radius: .3125em;
 }
 .ui-title {
-    color:#fff;
+    color:#000000;
 }
 .ui-listview>.ui-li-divider {
     border-top-color:#ccc;
@@ -69,4 +70,20 @@ h3.bi-text-danger  {
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+}
+.principal-menu {
+    font-size:0.8em;
+    text-align: center;
+    height:130px; 
+    background-color:rgba(255, 255, 255, 0.8);
+    color:black;
+    font-weight:none;
+    padding-top: 10px; 
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.5);
+}
+
+.principal-fondo {
+
 }

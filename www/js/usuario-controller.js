@@ -376,7 +376,7 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
                 for (var ix = 0; ix < object.medicamentoComercialList.length; ix++) {
                     labelMx += '<ul><li>';
                     var mx = object.medicamentoComercialList[ix];
-                    labelMx += mx.descripcion;
+                    labelMx += mx.descripcion+' <b> Cantidad: </b>'+mx.cantidad;
                     labelMx += '</li></ul>';
                 }
                 labels += labelMx;

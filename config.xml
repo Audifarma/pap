@@ -12,4 +12,5 @@
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
+    <preference name="orientation" value="portrait"/>
 </widget>
