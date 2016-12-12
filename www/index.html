@@ -232,16 +232,16 @@
             </div>
         </div>
 
-        <div id="domicilio" data-role="page" data-url="map-page" style="background-color: #363636" >
-            <div data-role="header" data-position="fixed" style="background-color: #0CB4FD" >
+        <div id="domicilio" data-role="page" data-url="map-page" style="background-image: url('images/fondo_general.png');    background-repeat: no-repeat;     background-position: left top;     background-attachment: fixed;     background-size: 100%;" >
+            <div data-role="header" data-position="fixed" >
                 <a href="#pap" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-notext" ></a>
                 <h1>Domicilio</h1>
             </div>
             <div role="main" class="ui-content" >
-                <div style="position: absolute;top: 10%;width:90%;">
-                    <br>
+                
+                <div style="background-color:rgba(255, 255, 255, 0.8);padding: 20px">                    <br>
                     <!--<a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini">Cambiar</a> -->
-                    <div class="ui-body ui-body-a ui-corner-all" style="border:none; background-color: rgba(51, 136, 204, 0.49)">
+                    <div class="ui-body ui-body-a ui-corner-all" style="border:none;">
                         <form style="margin:0px">
                             <div id="div-autorizaciones-domicilio-usuario"></div>
                         </form>
@@ -270,7 +270,6 @@
 
                     <div id="domicilio-err" class="bi-invisible"></div>
                     <a data-rel="popup" data-transition="pop" data-position-to="window" id="btn-domicilio-confirmar"
-                       style="background-color: #0D94E6;"
                        class="ui-btn ui-btn-b ui-corner-all bi-top-margin-1-5">Generar Pedido</a>
 
                 </div>
