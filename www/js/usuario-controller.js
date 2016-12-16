@@ -365,18 +365,20 @@ pap.AutorizacionController.prototype.cargarAutorizacionesUsuario = function (usu
 //                $("#btn-confirmar").prop('disabled', false).button("refresh");
                 $($btn).prop('disabled', false).button("refresh");
                 var object = JSON.parse(resp[i]);
+                var d = new Date(object.fechaUso);
                 labels += '<input type="checkbox" checked value=' + object.nap + '-' + object.alistamientoPK.numeroAlistamiento + ' id="s'
                         + i
                         + '"><label for="s'
                         + i
-                        + '">Autorización-'
+                        + '">Autorización - '
                         + object.nap
+                        + '<br/> Fecha Autorización - ' + d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear() + '<br/>'
                         + '</label>';
                 var labelMx = '';
                 for (var ix = 0; ix < object.medicamentoComercialList.length; ix++) {
                     labelMx += '<ul><li>';
                     var mx = object.medicamentoComercialList[ix];
-                    labelMx += mx.descripcion+' <b> Cantidad: </b>'+mx.cantidad;
+                    labelMx += mx.descripcion + ' <b> Cantidad: </b>' + mx.cantidad;
                     labelMx += '</li></ul>';
                 }
                 labels += labelMx;
