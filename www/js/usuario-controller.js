@@ -245,12 +245,12 @@ pap.UsuarioController.prototype.onConfirmarDomicilio = function () {
         this.$municipioEnvio.addClass(invalidSelect);
         camposValidos = false;
     }
-    if (this.$direccionEnvio.length <= 5) {
+    if (this.$direccionEnvio.val().length <= 5) {
         this.$direccionEnvio.addClass(invalidInputStyle);
         camposValidos = false;
     }
 
-    if (this.$telefonoEnvio.length <= 6) {
+    if (this.$telefonoEnvio.val().length <= 6) {
         this.$telefonoEnvio.addClass(invalidInputStyle);
         telefonoInvalido = true;
         camposValidos = false;
