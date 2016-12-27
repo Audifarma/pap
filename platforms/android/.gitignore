@@ -2,13 +2,13 @@
 build.xml
 local.properties
 /gradlew
-/gradlew.bat
 /gradle
 # Ant builds
-ant-built
+ant-build
 ant-gen
 # Eclipse builds
 gen
 out
 # Gradle builds
 /build
+!/gradle/
