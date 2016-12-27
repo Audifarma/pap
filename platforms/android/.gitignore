@@ -12,3 +12,4 @@ out
 # Gradle builds
 /build
 !/gradle/
+!/build/

@@ -1,0 +1,11 @@
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\classes\debug
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-df3e54ef09a83dd0b588fab5173ac7f15bdfcff8.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-ad7e6e6436bcf481a9989c11e58600ca05e49e09.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-0bffbb91c76ffa37b20d5d162e43c703a6ba2994.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-ce749a92bb26d16793bd51c31a135014658ed81c.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-7e314addf506434ed371c2638722d7054e40afac.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-a749c8f7122f9b4b8142242f075d66f237188ad1.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-6a0ff09c18b5361385190e035123f028e6c452d4.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-1385a0754f1c16ac437d81d09e92113b2ba779b3.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-aa782644be96d162fd736d40da17d34567493896.jar
+D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-b4378d47548ab3955cef758737606e638b6d7ee1.jar

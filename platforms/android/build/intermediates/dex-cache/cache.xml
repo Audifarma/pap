@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-b4378d47548ab3955cef758737606e638b6d7ee1.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v13\23.1.1\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f4d7a07120e76988f3a15403838d323c2400db83">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-df3e54ef09a83dd0b588fab5173ac7f15bdfcff8.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\8.4.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2d7fe76982677315c4dc4edfb459c8ca718a9d4c">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-ce749a92bb26d16793bd51c31a135014658ed81c.jar" />
+    </item>
+    <item
+        jar="D:\android-sdk-win\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-ad7e6e6436bcf481a9989c11e58600ca05e49e09.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-1385a0754f1c16ac437d81d09e92113b2ba779b3.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v13\23.1.1\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ddf5f4817565c9db82613c16093f76640a54e15">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-0bffbb91c76ffa37b20d5d162e43c703a6ba2994.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-aa782644be96d162fd736d40da17d34567493896.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ab9085c8e099223e7247614ed255ddf87673cf49">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-a749c8f7122f9b4b8142242f075d66f237188ad1.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.4.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="613298b7aa012f121ce542881c0a599ebd8078f2">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-6a0ff09c18b5361385190e035123f028e6c452d4.jar" />
+    </item>
+    <item
+        jar="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="D:\T\proyectos\pap\pap\platforms\android\build\intermediates\pre-dexed\debug\classes-7e314addf506434ed371c2638722d7054e40afac.jar" />
+    </item>
+
+</items>
