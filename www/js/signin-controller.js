@@ -133,6 +133,7 @@ pap.SignInController.prototype.onSignInCommand = function () {
                     keepSignedIn: me.$chkKeepSignedIn.is(":checked"),
                     usuario: usuario
                 });
+                $("#label-usuario-registrado").text(pap.Session.getInstance().get().userProfileModel);
                 // Go to main menu.
                 $.mobile.navigate(me.papPageId);
                 return;
