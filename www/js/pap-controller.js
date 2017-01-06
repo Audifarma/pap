@@ -7,6 +7,7 @@ pap.PapController = function () {
     this.$labelUsuarioRegistrado = null;
     this.$linkCerrarSession = null;
     this.papPageId  = null;
+    this.$pageIndex = null;
 };
 
 pap.PapController.prototype.init = function () {
@@ -16,6 +17,7 @@ pap.PapController.prototype.init = function () {
     this.$labelUsuarioRegistrado = $("#label-usuario-registrado", this.$autorizacionPage);
     this.$linkCerrarSession = $("#div-cerrar-sesion", this.$autorizacionPage);
     this.papPageId = "#page-signin";
+    this.pageIndex = "#page-index";
 };
 
 pap.PapController.prototype.iniciarConfirmacion = function () {
@@ -27,5 +29,5 @@ pap.PapController.prototype.iniciarConfirmacion = function () {
 pap.PapController.prototype.cerrarSession = function () {
     var me = this;
     pap.Session.deleteInstance();
-    $.mobile.navigate(me.papPageId);
+    $.mobile.navigate(me.pageIndex);
 };
