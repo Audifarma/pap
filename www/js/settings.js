@@ -1,4 +1,6 @@
-//var servicio = "http://190.14.226.155:8095/paprs/webresources/";pruebas
+/**pruebas*/
+//var servicio = "http://190.14.226.155:8095/paprs/webresources/";
+/**producción*/
 var servicio = "http://190.24.8.230:8095/paprs/webresources/";
 
 var usuario = {
