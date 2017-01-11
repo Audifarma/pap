@@ -1,4 +1,7 @@
-var servicio = "http://190.14.226.155:8095/paprs/webresources/";
+//pruebas
+var servicio = "http://190.14.226.155:8095/paprs-pruebas/webresources/";
+//producción
+//var servicio = "http://190.14.226.155:8095/paprs/webresources/";
 
 var usuario = {
     codTipoDocumento: 0, documentoIdentidad: null, nombre: null, apellido: null, correo: null, edad: 0, fechaNacimiento: null, codigo: null,

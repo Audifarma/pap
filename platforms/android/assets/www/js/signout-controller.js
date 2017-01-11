@@ -2,19 +2,22 @@ var pap = pap || {};
 
 pap.SignOutController = function () {
 
-    this.$signInPage = null;    
+    this.$signInPage = null;
     this.$btnSubmit = null;
-    this.$ctnErr = null;    
-    this.papPageId=null;
+    this.$ctnErr = null;
+    this.papPageId = null;
+    this.$pageIndex = null;
+
 };
 
 pap.SignOutController.prototype.init = function () {
-    this.$signInPage = $("#page-signin");    
+    this.$signInPage = $("#page-signin");
     this.papPageId = "#pap";
-    this.$btnSubmit = $("#btn-submit", this.papPageId);    
+    this.$btnSubmit = $("#btn-submit", this.papPageId);
+    this.$pageIndex = $("#page-index");
 };
 
 pap.SignOutController.prototype.cerrarSession = function () {
     pap.Session.deleteInstance();
-    $.mobile.navigate(this.$signInPage);
+    $.mobile.navigate(this.$pageIndex);
 };

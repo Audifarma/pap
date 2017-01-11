@@ -1,7 +1,6 @@
 var pap = pap || {};
 
 // Begin boilerplate code generated with Cordova project.
-
 var app = {
     // Application Constructor
     initialize: function () {
@@ -19,6 +18,7 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
+        document.addEventListener("backbutton", backButtonHandler, false);
         var push = PushNotification.init({
             "android": {
                 "senderID": "372883883978"
@@ -72,6 +72,17 @@ var app = {
     }
 };
 
+function backButtonHandler (e )
+{
+    if (pap.Session.getInstance().get().userProfileModel ) {
+        navigator.app.backHistory();
+    }
+    else {
+        $.mobile.changePage('#page-index');
+    }
+    alert(pap.Session.getInstance().get().userProfileModel);
+}
+            
 app.initialize();
 
 // End boilerplate code.
